@@ -26,8 +26,7 @@ type alias TopListItem =
 
 type alias Model =
     { selectedListSlug : String
-    , allTopLists :
-        List TopList
+    , allTopLists : List TopList
     , currentTopListItems : List TopListItem
     , error : String
     }
@@ -91,8 +90,8 @@ listElemShort currentSlug topList =
 listElemFull : TopList -> Html Msg
 listElemFull topList =
     div []
-        [ div [] [ text topList.title ]
-        , div [] [ text topList.description ]
+        [ h1 [] [ text topList.title ]
+        , div [ css [ marginBottom (Css.em 1.5) ] ] [ text topList.description ]
         ]
 
 
@@ -128,12 +127,10 @@ view model =
             model.allTopLists
     in
     div []
-        [ h1 [] [ text "All Lists" ]
+        [ h1 [] [ text "Select a list" ]
         , ul [] (List.map (listElemShort model.selectedListSlug) topLists)
-        , h1 [] [ text "Currently Selected List" ]
         , listElemFull (getListBySlug model.allTopLists model.selectedListSlug)
         , div [] [ text model.error ]
-        , h1 [] [ text "Content" ]
         , div [] (List.indexedMap topListItem model.currentTopListItems)
         ]
 
