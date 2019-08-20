@@ -29,6 +29,7 @@ type alias Model =
     , allTopLists :
         List TopList
     , currentTopListItems : List TopListItem
+    , error : String
     }
 
 
@@ -42,6 +43,7 @@ initialModel _ =
     ( { selectedListSlug = "keyboard-concerti-100"
       , allTopLists = TopList.lists
       , currentTopListItems = []
+      , error = ""
       }
     , getTopListItems "keyboard-concerti-100"
     )
@@ -94,9 +96,9 @@ listElemFull topList =
         ]
 
 
-topListItem : TopListItem -> Html Msg
-topListItem item =
-    div [] [ text (item.composer ++ ": " ++ item.work) ]
+topListItem : Int -> TopListItem -> Html Msg
+topListItem index item =
+    div [] [ text (String.fromInt (index + 1) ++ ". " ++ item.composer ++ ": " ++ item.work) ]
 
 
 topListItemDecoder : Decoder TopListItem
@@ -130,8 +132,9 @@ view model =
         , ul [] (List.map (listElemShort model.selectedListSlug) topLists)
         , h1 [] [ text "Currently Selected List" ]
         , listElemFull (getListBySlug model.allTopLists model.selectedListSlug)
+        , div [] [ text model.error ]
         , h1 [] [ text "Content" ]
-        , div [] (List.map topListItem model.currentTopListItems)
+        , div [] (List.indexedMap topListItem model.currentTopListItems)
         ]
 
 
@@ -144,10 +147,10 @@ update msg model =
         GotJson result ->
             case result of
                 Ok items ->
-                    ( { model | currentTopListItems = items }, Cmd.none )
+                    ( { model | currentTopListItems = items, error = "" }, Cmd.none )
 
                 Err _ ->
-                    ( model, Cmd.none )
+                    ( { model | currentTopListItems = [], error = "Could not load JSON data" }, Cmd.none )
 
 
 main =
