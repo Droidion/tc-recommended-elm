@@ -6,6 +6,7 @@ import Html
 import Html.Styled exposing (..)
 import Html.Styled.Attributes exposing (..)
 import Html.Styled.Events exposing (onClick)
+import Json.Decode exposing (Decoder, field, string)
 import TopList
 
 
@@ -92,8 +93,8 @@ view model =
 
 update : Msg -> Model -> Model
 update msg model =
-    case ( msg, model ) of
-        ( ClickedTopListSlug slugName, _ ) ->
+    case msg of
+        ClickedTopListSlug slugName ->
             { model | selectedListSlug = slugName }
 
 
