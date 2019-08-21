@@ -1,102 +1,402 @@
 [
-  { "composer": "Mahler", "work": "Das Lied von der Erde" },
-  { "composer": "Schubert", "work": "Winterreise, D911" },
-  { "composer": "Strauss", "work": "Vier Letzte Lieder" },
-  { "composer": "Schumann", "work": "Dichterliebe, Op.48" },
-  { "composer": "Schubert", "work": "Die Schöne Müllerin, D795" },
-  { "composer": "Mahler", "work": "Rückertlieder" },
-  { "composer": "Mahler", "work": "Lieder eines fahrenden Gesellen" },
-  { "composer": "Ravel", "work": "Shéhérazade" },
-  { "composer": "Barber", "work": "Knoxville: Summer of 1915, Op.24" },
-  { "composer": "Mahler", "work": "Kindertotenlieder" },
-  { "composer": "Berlioz", "work": "Les Nuits d'été, Op.7" },
-  { "composer": "Schoenberg", "work": "Pierrot Lunaire, Op.21" },
-  { "composer": "Vaughan Williams", "work": "On Wenlock Edge" },
-  { "composer": "Britten", "work": "Serenade for Tenor, Horn and Strings, Op.31" },
-  { "composer": "Brahms", "work": "Vier Ernste Gesänge, Op.121" },
-  { "composer": "Schubert", "work": "Schwanengesang, D957" },
-  { "composer": "Debussy", "work": "Fêtes Galantes, L80 & 104" },
-  { "composer": "Beethoven", "work": "An die ferne Geliebte, Op.98" },
-  { "composer": "Fauré", "work": "La Bonne Chanson, Op.61" },
-  { "composer": "Schubert", "work": "Erlkönig, D328" },
-  { "composer": "Schumann", "work": "Frauenliebe und -Leben, Op.42" },
-  { "composer": "Boulez", "work": "Le Marteau sans maître" },
-  { "composer": "Schubert", "work": "An die Musik, D547" },
-  { "composer": "Wolf", "work": "Mörike Lieder" },
-  { "composer": "Sibelius", "work": "Luonnotar, Op.70" },
-  { "composer": "Debussy", "work": "Ariettes Oubliées, L60" },
-  { "composer": "Dowland", "work": "Second Booke of Songes" },
-  { "composer": "Wolf", "work": "Italienisches Liederbuch" },
-  { "composer": "Brahms", "work": "Alto Rhapsody, Op.53" },
-  { "composer": "Grieg", "work": "Haugtussa, Op.67" },
-  { "composer": "Wagner", "work": "Wesendonck Lieder, WWV91" },
-  { "composer": "Schumann", "work": "Liederkreis, Op.39" },
-  { "composer": "Ravel", "work": "Chansons madécasses" },
-  { "composer": "Mahler", "work": "Revelge" },
-  { "composer": "Falla", "work": "7 Canciones populares españolas" },
-  { "composer": "Copland", "work": "12 Poems of Emily Dickinson" },
-  { "composer": "Berg", "work": "Altenberg Lieder, Op.4" },
-  { "composer": "Schoenberg", "work": "Das Buch der hängenden Gärten, Op.15" },
-  { "composer": "Berg", "work": "Sieben frühe Lieder" },
-  { "composer": "Stravinsky", "work": "Three Japanese Lyrics" },
-  { "composer": "Schubert", "work": "Nächt und Träume, D827" },
-  { "composer": "Messiaen", "work": "Harawi" },
-  { "composer": "Elgar", "work": "Sea Pictures, Op.37" },
-  { "composer": "Schumann", "work": "Liederkreis, Op.24" },
-  { "composer": "Strauss", "work": "4 Lieder, Op.27" },
-  { "composer": "Mussorgsky", "work": "Songs and Dances of Death" },
-  { "composer": "Mahler", "work": "Urlicht" },
-  { "composer": "Rachmaninoff", "work": "Vocalise, Op.34/14" },
-  { "composer": "Poulenc", "work": "Tel Jour, Telle Nuit, FP86" },
-  { "composer": "Dowland", "work": "First Booke of Songes" },
-  { "composer": "Ravel", "work": "Trois poèmes de Stéphane Mallarmé" },
-  { "composer": "Canteloube", "work": "Chants d'Auvergne" },
-  { "composer": "Debussy", "work": "Trois Chansons de Bilitis, L90" },
-  { "composer": "Britten", "work": "Les Illuminations, Op.18" },
-  { "composer": "Webern", "work": "5 Lieder, Op.3" },
-  { "composer": "Finzi", "work": "Dies Natalis, Op.8" },
-  { "composer": "Fauré", "work": "La Chanson d'Ève, Op.95" },
-  { "composer": "Schubert", "work": "Gretchen am Spinnrade, D118" },
-  { "composer": "Janáček", "work": "The Diary of One Who Disappeared" },
-  { "composer": "Brahms", "work": "Zwei Gesange for Alto, Viola and Piano, Op.91" },
-  { "composer": "Messiaen", "work": "Poèmes pour mi" },
-  { "composer": "Chausson", "work": "Poème de l'amour et de la mer, Op.19" },
-  { "composer": "Lieberson", "work": "Neruda Songs" },
-  { "composer": "Schubert", "work": "Du bist die Ruh, D776" },
-  { "composer": "Wolf", "work": "Spanisches Liederbuch" },
-  { "composer": "Machaut", "work": "Le Remède de Fortune" },
-  { "composer": "Villa-Lobos", "work": "Bachianas Brasileiras No.5" },
-  { "composer": "Mahler", "work": "Ablösung im Sommer" },
-  { "composer": "Delius", "work": "Five Songs from the Norwegian" },
-  { "composer": "Satie", "work": "Je Te Veux" },
-  { "composer": "Wolf", "work": "Goethe-Lieder" },
-  { "composer": "Schubert", "work": "Auf dem Wasser zu singen, D774" },
-  { "composer": "Barber", "work": "Dover Beach, Op.3" },
-  { "composer": "Schubert", "work": "Der Tod und das Mädchen, D531" },
-  { "composer": "Shostakovich", "work": "From Jewish Folk Poetry, Op.79" },
-  { "composer": "Martinů", "work": "Magic Nights" },
-  { "composer": "Zemlinsky", "work": "Lyric Symphony, Op.18" },
-  { "composer": "Poulenc", "work": "Fiançailles pour rire, FP101" },
-  { "composer": "Beethoven", "work": "Adelaide, Op.46" },
-  { "composer": "Hahn", "work": "À Chloris" },
-  { "composer": "Fauré", "work": "Cinq Mélodies de Venise, Op.58" },
-  { "composer": "Berg", "work": "4 Gesänge, Op.2" },
-  { "composer": "Schumann", "work": "Myrthen, Op.25" },
-  { "composer": "Debussy", "work": "Cinq Poèmes de Baudelaire, L64" },
-  { "composer": "Falla", "work": "Psyché, for mezzo-soprano, flute, harp & string trio, G67" },
-  { "composer": "Mahler", "work": "Wer hat dies Liedlein erdacht?" },
-  { "composer": "Alfonso X El Sabio", "work": "Santa Maria Strela Do Dia (Cantigas De Santa Maria #100)" },
-  { "composer": "Fauré", "work": "Après un rêve, Op.7/1" },
-  { "composer": "Poulenc", "work": "Le bal masqué, FP60" },
-  { "composer": "Dowland", "work": "A Pilgrimes Solace" },
-  { "composer": "Fauré", "work": "Clair de Lune, Op.46/2" },
-  { "composer": "Berg", "work": "Der Wein" },
-  { "composer": "Vaughan Williams", "work": "Five Mystical Songs" },
-  { "composer": "Brahms", "work": "5 Lieder, Op.105" },
-  { "composer": "Ives", "work": "General William Booth Enters into Heaven" },
-  { "composer": "Sibelius", "work": "Six Runeberg Songs, Op.90" },
-  { "composer": "Rachmaninoff", "work": "Zdes' khorosho, Op.21/7" },
-  { "composer": "Dvořák", "work": "Gypsy Melodies, Op.55" },
-  { "composer": "Nystroem", "work": "Songs by the Sea" },
-  { "composer": "Schoenberg", "work": "6 Lieder, Op.3" }
+  {
+    "composer": "Mahler",
+    "work": "Das Lied von der Erde"
+  },
+  {
+    "composer": "Schubert",
+    "work": "Winterreise, D911"
+  },
+  {
+    "composer": "Strauss",
+    "work": "Vier Letzte Lieder"
+  },
+  {
+    "composer": "Schumann",
+    "work": "Dichterliebe, Op. 48"
+  },
+  {
+    "composer": "Schubert",
+    "work": "Die Schöne Müllerin, D.795"
+  },
+  {
+    "composer": "Mahler",
+    "work": "Rückertlieder"
+  },
+  {
+    "composer": "Mahler",
+    "work": "Lieder eines fahrenden Gesellen"
+  },
+  {
+    "composer": "Ravel",
+    "work": "Shéhérazade"
+  },
+  {
+    "composer": "Barber",
+    "work": "Knoxville: Summer of 1915, Op. 24"
+  },
+  {
+    "composer": "Mahler",
+    "work": "Kindertotenlieder"
+  },
+  {
+    "composer": "Berlioz",
+    "work": "Les Nuits d'été, Op. 7"
+  },
+  {
+    "composer": "Schoenberg",
+    "work": "Pierrot Lunaire, Op. 21"
+  },
+  {
+    "composer": "Vaughan Williams",
+    "work": "On Wenlock Edge"
+  },
+  {
+    "composer": "Britten",
+    "work": "Serenade for Tenor, Horn and Strings, Op. 31"
+  },
+  {
+    "composer": "Brahms",
+    "work": "Vier Ernste Gesänge, Op. 121"
+  },
+  {
+    "composer": "Schubert",
+    "work": "Schwanengesang, D957"
+  },
+  {
+    "composer": "Debussy",
+    "work": "Fêtes Galantes, L80 & 104"
+  },
+  {
+    "composer": "Beethoven",
+    "work": "An die ferne Geliebte, Op. 98"
+  },
+  {
+    "composer": "Fauré",
+    "work": "La Bonne Chanson, Op. 61"
+  },
+  {
+    "composer": "Schubert",
+    "work": "Erlkönig, D328"
+  },
+  {
+    "composer": "Schumann",
+    "work": "Frauenliebe und -Leben, Op. 42"
+  },
+  {
+    "composer": "Boulez",
+    "work": "Le Marteau sans maître"
+  },
+  {
+    "composer": "Schubert",
+    "work": "An die Musik, D547"
+  },
+  {
+    "composer": "Wolf",
+    "work": "Mörike Lieder"
+  },
+  {
+    "composer": "Sibelius",
+    "work": "Luonnotar, Op. 70"
+  },
+  {
+    "composer": "Debussy",
+    "work": "Ariettes Oubliées, L60"
+  },
+  {
+    "composer": "Dowland",
+    "work": "Second Booke of Songes"
+  },
+  {
+    "composer": "Wolf",
+    "work": "Italienisches Liederbuch"
+  },
+  {
+    "composer": "Brahms",
+    "work": "Alto Rhapsody, Op. 53"
+  },
+  {
+    "composer": "Grieg",
+    "work": "Haugtussa, Op. 67"
+  },
+  {
+    "composer": "Wagner",
+    "work": "Wesendonck Lieder, WWV91"
+  },
+  {
+    "composer": "Schumann",
+    "work": "Liederkreis, Op. 39"
+  },
+  {
+    "composer": "Ravel",
+    "work": "Chansons madécasses"
+  },
+  {
+    "composer": "Mahler",
+    "work": "Revelge"
+  },
+  {
+    "composer": "Falla",
+    "work": "7 Canciones populares españolas"
+  },
+  {
+    "composer": "Copland",
+    "work": "12 Poems of Emily Dickinson"
+  },
+  {
+    "composer": "Berg",
+    "work": "Altenberg Lieder, Op. 4"
+  },
+  {
+    "composer": "Schoenberg",
+    "work": "Das Buch der hängenden Gärten, Op. 15"
+  },
+  {
+    "composer": "Berg",
+    "work": "Sieben frühe Lieder"
+  },
+  {
+    "composer": "Stravinsky",
+    "work": "Three Japanese Lyrics"
+  },
+  {
+    "composer": "Schubert",
+    "work": "Nächt und Träume, D827"
+  },
+  {
+    "composer": "Messiaen",
+    "work": "Harawi"
+  },
+  {
+    "composer": "Elgar",
+    "work": "Sea Pictures, Op. 37"
+  },
+  {
+    "composer": "Schumann",
+    "work": "Liederkreis, Op. 24"
+  },
+  {
+    "composer": "Strauss",
+    "work": "4 Lieder, Op. 27"
+  },
+  {
+    "composer": "Mussorgsky",
+    "work": "Songs and Dances of Death"
+  },
+  {
+    "composer": "Mahler",
+    "work": "Urlicht"
+  },
+  {
+    "composer": "Rachmaninoff",
+    "work": "Vocalise, Op. 34/14"
+  },
+  {
+    "composer": "Poulenc",
+    "work": "Tel Jour, Telle Nuit, FP86"
+  },
+  {
+    "composer": "Dowland",
+    "work": "First Booke of Songes"
+  },
+  {
+    "composer": "Ravel",
+    "work": "Trois poèmes de Stéphane Mallarmé"
+  },
+  {
+    "composer": "Canteloube",
+    "work": "Chants d'Auvergne"
+  },
+  {
+    "composer": "Debussy",
+    "work": "Trois Chansons de Bilitis, L90"
+  },
+  {
+    "composer": "Britten",
+    "work": "Les Illuminations, Op. 18"
+  },
+  {
+    "composer": "Webern",
+    "work": "5 Lieder, Op. 3"
+  },
+  {
+    "composer": "Finzi",
+    "work": "Dies Natalis, Op. 8"
+  },
+  {
+    "composer": "Fauré",
+    "work": "La Chanson d'Ève, Op. 95"
+  },
+  {
+    "composer": "Schubert",
+    "work": "Gretchen am Spinnrade, D118"
+  },
+  {
+    "composer": "Janáček",
+    "work": "The Diary of One Who Disappeared"
+  },
+  {
+    "composer": "Brahms",
+    "work": "Zwei Gesange for Alto, Viola and Piano, Op. 91"
+  },
+  {
+    "composer": "Messiaen",
+    "work": "Poèmes pour mi"
+  },
+  {
+    "composer": "Chausson",
+    "work": "Poème de l'amour et de la mer, Op. 19"
+  },
+  {
+    "composer": "Lieberson",
+    "work": "Neruda Songs"
+  },
+  {
+    "composer": "Schubert",
+    "work": "Du bist die Ruh, D776"
+  },
+  {
+    "composer": "Wolf",
+    "work": "Spanisches Liederbuch"
+  },
+  {
+    "composer": "Machaut",
+    "work": "Le Remède de Fortune"
+  },
+  {
+    "composer": "Villa-Lobos",
+    "work": "Bachianas Brasileiras No.5"
+  },
+  {
+    "composer": "Mahler",
+    "work": "Ablösung im Sommer"
+  },
+  {
+    "composer": "Delius",
+    "work": "Five Songs from the Norwegian"
+  },
+  {
+    "composer": "Satie",
+    "work": "Je Te Veux"
+  },
+  {
+    "composer": "Wolf",
+    "work": "Goethe-Lieder"
+  },
+  {
+    "composer": "Schubert",
+    "work": "Auf dem Wasser zu singen, D774"
+  },
+  {
+    "composer": "Barber",
+    "work": "Dover Beach, Op. 3"
+  },
+  {
+    "composer": "Schubert",
+    "work": "Der Tod und das Mädchen, D531"
+  },
+  {
+    "composer": "Shostakovich",
+    "work": "From Jewish Folk Poetry, Op. 79"
+  },
+  {
+    "composer": "Martinů",
+    "work": "Magic Nights"
+  },
+  {
+    "composer": "Zemlinsky",
+    "work": "Lyric Symphony, Op. 18"
+  },
+  {
+    "composer": "Poulenc",
+    "work": "Fiançailles pour rire, FP101"
+  },
+  {
+    "composer": "Beethoven",
+    "work": "Adelaide, Op. 46"
+  },
+  {
+    "composer": "Hahn",
+    "work": "À Chloris"
+  },
+  {
+    "composer": "Fauré",
+    "work": "Cinq Mélodies de Venise, Op. 58"
+  },
+  {
+    "composer": "Berg",
+    "work": "4 Gesänge, Op. 2"
+  },
+  {
+    "composer": "Schumann",
+    "work": "Myrthen, Op. 25"
+  },
+  {
+    "composer": "Debussy",
+    "work": "Cinq Poèmes de Baudelaire, L64"
+  },
+  {
+    "composer": "Falla",
+    "work": "Psyché, for mezzo-soprano, flute, harp & string trio, G67"
+  },
+  {
+    "composer": "Mahler",
+    "work": "Wer hat dies Liedlein erdacht?"
+  },
+  {
+    "composer": "Alfonso X El Sabio",
+    "work": "Santa Maria Strela Do Dia (Cantigas De Santa Maria #100)"
+  },
+  {
+    "composer": "Fauré",
+    "work": "Après un rêve, Op. 7/1"
+  },
+  {
+    "composer": "Poulenc",
+    "work": "Le bal masqué, FP60"
+  },
+  {
+    "composer": "Dowland",
+    "work": "A Pilgrimes Solace"
+  },
+  {
+    "composer": "Fauré",
+    "work": "Clair de Lune, Op. 46/2"
+  },
+  {
+    "composer": "Berg",
+    "work": "Der Wein"
+  },
+  {
+    "composer": "Vaughan Williams",
+    "work": "Five Mystical Songs"
+  },
+  {
+    "composer": "Brahms",
+    "work": "5 Lieder, Op. 105"
+  },
+  {
+    "composer": "Ives",
+    "work": "General William Booth Enters into Heaven"
+  },
+  {
+    "composer": "Sibelius",
+    "work": "Six Runeberg Songs, Op. 90"
+  },
+  {
+    "composer": "Rachmaninoff",
+    "work": "Zdes' khorosho, Op. 21/7"
+  },
+  {
+    "composer": "Dvořák",
+    "work": "Gypsy Melodies, Op. 55"
+  },
+  {
+    "composer": "Nystroem",
+    "work": "Songs by the Sea"
+  },
+  {
+    "composer": "Schoenberg",
+    "work": "6 Lieder, Op. 3"
+  }
 ]

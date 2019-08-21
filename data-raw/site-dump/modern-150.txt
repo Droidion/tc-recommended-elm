@@ -15,7 +15,7 @@ Facilitated by Toddlertoddy and berghansson
 12. Messiaen: Turangalîla-Symphonie
 13. Pärt: Tabula Rasa
 14. Shostakovich: String Quartet No. 8 in C minor, Op. 110
-15. Prokofiev: Symphony No. 5 in B-flat major, Op. 100
+15. Prokofiev: Symphony No. 5 in B♭ major, Op. 100
 16. Ravel: Piano Concerto in G major, M 83
 17. Berg: Wozzeck, Op. 7
 18. Stravinsky: Petrushka
@@ -87,10 +87,10 @@ Facilitated by Toddlertoddy and berghansson
 84. Janáček: String Quartet No. 1 "Kreutzer Sonata"
 85. Berg: Piano Sonata, Op. 1
 86. Penderecki: St. Luke Passion
-87. Stravinsky: Concerto in E-flat "Dumbarton Oaks"
+87. Stravinsky: Concerto in E♭ "Dumbarton Oaks"
 88. Szymanowski: Stabat Mater
 89. Penderecki: Symphony No. 7 "Seven Gates of Jerusalem"
-90. Prokofiev: Piano Sonata No. 7 in B-flat major "Stalingrad", Op. 83
+90. Prokofiev: Piano Sonata No. 7 in B♭ major "Stalingrad", Op. 83
 91. Ligeti: Piano Concerto
 92. Ravel: Piano Trio in A minor, M 67
 93. Poulenc: Gloria, FP 177
@@ -116,7 +116,7 @@ Facilitated by Toddlertoddy and berghansson
 113. Ravel: Le tombeau de Couperin, M 68
 114. Stravinsky: The Soldier's Tale
 115. Schoenberg: A Survivor in Warsaw, Op. 46
-116. Prokofiev: Symphony No. 6 in E-flat minor, Op. 111
+116. Prokofiev: Symphony No. 6 in E♭ minor, Op. 111
 117. Debussy: Cello Sonata, L 135
 118. Bartók: Divertimento for String Orchestra, Sz. 113 BB 118
 119. Ligeti: Le grand macabre
@@ -131,7 +131,7 @@ Facilitated by Toddlertoddy and berghansson
 128. Dutilleux: Tout un monde lointain...
 129. Berio: Sinfonia
 130. Riley: In C
-131. Shostakovich: Cello Concerto No. 1 in E-flat, Op. 107
+131. Shostakovich: Cello Concerto No. 1 in E♭, Op. 107
 132. Poulenc: Concerto for 2 pianos, FP 61
 133. Penderecki: Utrenja
 134. Ligeti: Musica Ricercata

@@ -3,7 +3,7 @@ Facilitated by TurnaboutVox
 
 1. Schubert: String Quartet No 14 in D minor, D. 810 "Death and the Maiden"
 2. Beethoven: String Quartet No. 15 in A minor, Op. 132
-3. Beethoven: String Quartet No. 13 in B-flat major, Op. 130 + Op. 133 "Grosse Fuge"
+3. Beethoven: String Quartet No. 13 in B♭ major, Op. 130 + Op. 133 "Grosse Fuge"
 4. Beethoven: String Quartet No. 14 in C-sharp minor, Op. 131
 5. Shostakovich: String Quartet No. 8 in C minor, Op.110
 6. Debussy: String Quartet in G minor, Op. 10
@@ -39,7 +39,7 @@ Facilitated by TurnaboutVox
 33. Schubert: String Quartet No.12 in C minor, D. 703 'Quartettsatz'
 34. Crumb: Black Angels
 35. Bartók: String Quartet No. 1 in A minor, Sz. 40
-36. Shostakovich: String Quartet No. 15 in E-flat minor, Op. 144
+36. Shostakovich: String Quartet No. 15 in E♭ minor, Op. 144
 37. Shostakovich: String Quartet No. 3, Op. 73
 38. Smetana: String Quartet No. 1 in E minor, JB 1:105 "From My Life"
 39. Shostakovich: String Quartet No 13 in B flat minor, Op. 138
@@ -48,7 +48,7 @@ Facilitated by TurnaboutVox
 41. Beethoven: String Quartet No. 12 in E flat, Op. 127
 42. Mozart: String Quartet No. 17 in B flat, KV 458 "The Hunt"
 43. Bartók: String Quartet No. 3, Sz. 85
-44. Haydn: String Quartet No. 30, Op.33 No. 2 in E-flat major, Hob. III:38 "The Joke"
+44. Haydn: String Quartet No. 30, Op.33 No. 2 in E♭ major, Hob. III:38 "The Joke"
 45. Brahms: String Quartet No. 1 in C minor, Op. 51/1
 46. Mozart: String Quartet No. 18 in A major, KV 464
 47. Nielsen: String Quartet No. 1 in G minor, Op. 13
@@ -101,7 +101,7 @@ Facilitated by TurnaboutVox
 90. Walton: String Quartet No. 2 in A minor
 
 91. Haydn: String Quartet No. 57 in C major, Op 74 No. 1, Hob. III:72
-92. Shostakovich: String Quartet No. 9 in E-Flat major, Op. 117
+92. Shostakovich: String Quartet No. 9 in E♭ major, Op. 117
 93. Mendelssohn: String Quartet No. 3 in D major, Op. 44 No. 1
 94. Carter: String Quartet No. 2
 95. Schoenberg: String Quartet No. 1 in D minor, Op. 7
@@ -138,7 +138,7 @@ Facilitated by TurnaboutVox
 123. Szymanowski: String Quartet No. 1 in C, Op. 37
 124. Shostakovich: String Quartet No. 7 in F-sharp minor, Op. 108
 125. Crawford-Seeger: String Quartet
-126. Tchaikovsky: String Quartet No. 3 in E-flat minor, Op. 30
+126. Tchaikovsky: String Quartet No. 3 in E♭ minor, Op. 30
 127. Penderecki: String Quartet No. 1
 128. Nono: Fragmente - Stille, An Diotima
 129. Kurtág: String Quartet, Op. 1
