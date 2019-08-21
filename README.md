@@ -6,4 +6,15 @@ Talkclassical recommended classical music works in a friendly interactive format
 
 Install Elm using official guide: https://guide.elm-lang.org/install.html
 
-Run `elm reactor`, open provided URL in a browser, and navigate to `src/Main.elm`
+For development:
+
+```
+$ yarn install
+$ yarn start
+```
+
+For production:
+
+```
+$ yarn prod
+```
