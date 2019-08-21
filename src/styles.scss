@@ -3,6 +3,7 @@
 $main-color: #4f5b60;
 $lighter-color: #72848c;
 $highlight-color: #10b1dc;
+$dark-background-color: #122f3b;
 
 body {
     color: $main-color;
@@ -10,6 +11,7 @@ body {
     font-weight: 500;
     font-size: 18px;
     line-height: 34px;
+    margin: 0;
 }
 
 .grid-container {
@@ -20,19 +22,28 @@ body {
 }
 
 header {
+    background: $dark-background-color;
     display: flex;
-    align-items: center;
-    font-size: 3em;
+    flex-direction: column;
+    justify-content: center;
+
     font-weight: 300;
     grid-area: header;
 }
 
 .title {
     margin-left: 1.5rem;
+    font-size: 1.8em;
+    font-weight: 400;
+    text-transform: uppercase;
+    background: -webkit-linear-gradient(#0daedf, #2cd3c7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 section {
     grid-area: content;
+    padding: 1.5rem;
 }
 
 aside {
@@ -40,7 +51,7 @@ aside {
 }
 
 .selected {
-    color: $highlight-color:;
+    color: $highlight-color;
 }
 
 .list-description {
@@ -55,7 +66,7 @@ h1 {
 
 ul {
     list-style-type: none;
-    margin: 0 1.5rem;
+    margin: 1.5rem;
     padding: 0;
     li {
         color: $lighter-color;
