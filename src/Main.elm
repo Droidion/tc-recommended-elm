@@ -92,7 +92,12 @@ listElemFull topList =
 
 topListItem : Int -> TopListItem -> Html Msg
 topListItem index item =
-    div [] [ text (String.fromInt (index + 1) ++ ". " ++ item.composer ++ ": " ++ item.work) ]
+    div [ class "top-list-item"]
+        [ 
+          div [ class "order" ] [ text (String.fromInt (index + 1)) ]
+        , div [ class "composer" ] [ text item.composer ]
+        , div [ class "work" ] [ text item.work ]
+        ]
 
 
 topListItemDecoder : Decoder TopListItem
