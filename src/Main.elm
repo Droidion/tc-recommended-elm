@@ -71,6 +71,13 @@ listElemShort : String -> TopList -> Html Msg
 listElemShort currentSlug topList =
     li
         [ onClick (ClickedTopListSlug topList.slug)
+        , class
+            (if topList.slug == currentSlug then
+                "selected"
+
+             else
+                ""
+            )
         ]
         [ text topList.title ]
 
@@ -79,7 +86,7 @@ listElemFull : TopList -> Html Msg
 listElemFull topList =
     div []
         [ h1 [] [ text topList.title ]
-        , div [] [ text topList.description ]
+        , div [ class "list-description" ] [ text topList.description ]
         ]
 
 
@@ -114,12 +121,18 @@ view model =
         topLists =
             model.allTopLists
     in
-    div []
-        [ h1 [] [ text "Select a list" ]
-        , ul [] (List.map (listElemShort model.selectedListSlug) topLists)
-        , listElemFull (getListBySlug model.allTopLists model.selectedListSlug)
-        , div [] [ text model.error ]
-        , div [] (List.indexedMap topListItem model.currentTopListItems)
+    div [ class "grid-container" ]
+        [ header []
+            [ div [ class "title" ] [ text "Talkclassical Top Lists" ]
+            , div [] [ text model.error ]
+            ]
+        , section []
+            [ listElemFull (getListBySlug model.allTopLists model.selectedListSlug)
+            , div [] (List.indexedMap topListItem model.currentTopListItems)
+            ]
+        , aside []
+            [ ul [] (List.map (listElemShort model.selectedListSlug) topLists)
+            ]
         ]
 
 
