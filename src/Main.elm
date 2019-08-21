@@ -1,11 +1,9 @@
 module Main exposing (main)
 
 import Browser
-import Css exposing (..)
-import Html
-import Html.Styled exposing (..)
-import Html.Styled.Attributes exposing (..)
-import Html.Styled.Events exposing (onClick)
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (onClick)
 import Http
 import Json.Decode exposing (Decoder, field, list, map2, string)
 import TopList
@@ -73,16 +71,6 @@ listElemShort : String -> TopList -> Html Msg
 listElemShort currentSlug topList =
     li
         [ onClick (ClickedTopListSlug topList.slug)
-        , css
-            [ hover
-                [ cursor pointer
-                ]
-            , if topList.slug == currentSlug then
-                textDecoration underline
-
-              else
-                textDecoration none
-            ]
         ]
         [ text topList.title ]
 
@@ -91,7 +79,7 @@ listElemFull : TopList -> Html Msg
 listElemFull topList =
     div []
         [ h1 [] [ text topList.title ]
-        , div [ css [ marginBottom (Css.em 1.5) ] ] [ text topList.description ]
+        , div [] [ text topList.description ]
         ]
 
 
@@ -115,7 +103,7 @@ topListItemsDecoder =
 getTopListItems : String -> Cmd Msg
 getTopListItems slug =
     Http.get
-        { url = "/assets/json/" ++ slug ++ ".json"
+        { url = "/json/" ++ slug ++ ".json"
         , expect = Http.expectJson GotJson topListItemsDecoder
         }
 
@@ -151,9 +139,13 @@ update msg model =
 
 
 main =
-    Browser.element
+    Browser.document
         { init = initialModel
         , subscriptions = subscriptions
         , update = update
-        , view = view >> toUnstyled
+        , view =
+            \m ->
+                { title = "TC Recommended"
+                , body = [ view m ]
+                }
         }
