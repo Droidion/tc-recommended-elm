@@ -1,0 +1,32 @@
+header {
+    background: $dark-background-color;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.5rem;
+    text-align: center;
+
+    @media screen and (min-width: $break-small) {
+        text-align: left;
+    }
+
+    .title {
+        background: -webkit-linear-gradient(#0daedf, #2cd3c7);
+        font-size: 2rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+        color: white;
+        font-size: 1rem;
+        font-weight: 300;
+        margin-top: 0.5rem;
+
+        @media screen and (min-width: $break-small) {
+            margin-top: 0;
+        }
+    }
+}

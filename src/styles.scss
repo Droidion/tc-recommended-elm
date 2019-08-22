@@ -1,87 +1,12 @@
-@import "styles/colors";
 @import "styles/fonts";
+@import "styles/colors";
+@import "styles/vars";
 
-$break-small: 600px;
-
-html {
-    font-size: 15px;
-    margin: 0;
-
-    @media screen and (min-width: $break-small) {
-        font-size: 18px;
-    }
-}
-
-body {
-    color: $main-color;
-    font-family: "Roboto", sans-serif;
-    font-weight: 500;
-    margin: 0;
-}
-
-header {
-    background: $dark-background-color;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 1.5rem;
-    text-align: center;
-
-    @media screen and (min-width: $break-small) {
-        text-align: left;
-    }
-}
-
-.title {
-    background: -webkit-linear-gradient(#0daedf, #2cd3c7);
-    font-size: 2rem;
-    font-weight: 400;
-    text-transform: uppercase;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-.subtitle {
-    color: white;
-    font-size: 1rem;
-    font-weight: 300;
-    margin-top: 0.5rem;
-
-    @media screen and (min-width: $break-small) {
-        margin-top: 0;
-    }
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
-
-    @media screen and (min-width: $break-small) {
-        flex-direction: row;
-    }
-}
-
-aside {
-    padding-top: 0;
-    padding-right: 0;
-    min-width: 14rem;
-
-    @media screen and (min-width: $break-small) {
-        padding-top: 0.6rem;
-        padding-right: 1rem;
-    }
-}
-
-section {
-    padding: 0 1.5rem 1.5rem 1.5rem;
-
-    @media screen and (min-width: $break-small) {
-        padding: 1.5rem 1.5rem 1.5rem 1.5rem;
-    }
-}
-
-.selected {
-    color: $highlight-color;
-}
+@import "styles/core";
+@import "styles/layout";
+@import "styles/header";
+@import "styles/menu";
+@import "styles/typography";
 
 .list-description {
     color: $lighter-color;
@@ -90,43 +15,6 @@ section {
 
     @media screen and (min-width: $break-small) {
         text-align: left;
-    }
-}
-
-h1 {
-    font-size: 1.6rem;
-    margin: 0 0 0.5rem 0;
-    text-align: center;
-
-    @media screen and (min-width: $break-small) {
-        margin: 0 0 1rem 0;
-        text-align: left;
-    }
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-    text-align: center;
-
-    @media screen and (min-width: $break-small) {
-        text-align: left;
-    }
-
-    li {
-        color: $lighter-color;
-        display: inline-block;
-        margin: 0.4rem 1rem;
-
-        @media screen and (min-width: $break-small) {
-            display: block;
-            margin: 0 0 0.8rem 1.5rem;
-        }
-
-        &:hover {
-            color: $highlight-color;
-            cursor: pointer;
-        }
     }
 }
 

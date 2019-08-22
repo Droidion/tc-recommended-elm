@@ -1,0 +1,36 @@
+aside {
+    padding-top: 0;
+    padding-right: 0;
+    min-width: 14rem;
+
+    @media screen and (min-width: $break-small) {
+        padding-top: 0.6rem;
+        padding-right: 1rem;
+    }
+
+    ul.menu {
+        list-style-type: none;
+        padding: 0;
+        text-align: center;
+
+        @media screen and (min-width: $break-small) {
+            text-align: left;
+        }
+
+        li {
+            color: $lighter-color;
+            display: inline-block;
+            margin: 0.4rem 1rem;
+
+            @media screen and (min-width: $break-small) {
+                display: block;
+                margin: 0 0 0.8rem 1.5rem;
+            }
+
+            &:hover {
+                color: $highlight-color;
+                cursor: pointer;
+            }
+        }
+    }
+}

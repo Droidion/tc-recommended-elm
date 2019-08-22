@@ -132,7 +132,7 @@ headerBlock =
 menuBlock : Model -> List TopList -> Html Msg
 menuBlock model topLists =
     aside []
-        [ ul [] (List.map (listElemShort model.selectedListSlug) topLists)
+        [ ul [ class "menu" ] (List.map (listElemShort model.selectedListSlug) topLists)
         ]
 
 
