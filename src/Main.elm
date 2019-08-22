@@ -119,31 +119,23 @@ getLeaderboardItems slug =
 -- VIEWS
 
 
-headerBlock : Html Msg
-headerBlock =
+headerPartial : Html Msg
+headerPartial =
     header []
         [ div [ class "title" ] [ text "Talkclassical Top Lists" ]
         , div [ class "subtitle" ] [ text "Best works of classical music as voted by talkclassical.com members" ]
         ]
 
 
-menuBlock : Model -> List Leaderboard -> Html Msg
-menuBlock model leaderboards =
+menuPartial : Model -> List Leaderboard -> Html Msg
+menuPartial model leaderboards =
     aside []
-        [ ul [ class "menu" ] (List.map (listElemShort model.selectedListSlug) leaderboards)
+        [ ul [ class "menu" ] (List.map (menuItemPartial model.selectedListSlug) leaderboards)
         ]
 
 
-contentBlock : Model -> Html Msg
-contentBlock model =
-    section []
-        [ listElemFull (getListBySlug model.allLeaderboards model.selectedListSlug)
-        , div [] (List.indexedMap leaderboardItem model.currentLeaderboardItems)
-        ]
-
-
-listElemShort : String -> Leaderboard -> Html Msg
-listElemShort currentSlug leaderboard =
+menuItemPartial : String -> Leaderboard -> Html Msg
+menuItemPartial currentSlug leaderboard =
     li
         [ onClick (ClickedLeaderboardSlug leaderboard.slug)
         , class
@@ -157,16 +149,24 @@ listElemShort currentSlug leaderboard =
         [ text leaderboard.title ]
 
 
-listElemFull : Leaderboard -> Html Msg
-listElemFull leaderboard =
+contentPartial : Model -> Html Msg
+contentPartial model =
+    section []
+        [ leaderboardTitlePartial (getListBySlug model.allLeaderboards model.selectedListSlug)
+        , div [] (List.indexedMap leaderboardItemPartial model.currentLeaderboardItems)
+        ]
+
+
+leaderboardTitlePartial : Leaderboard -> Html Msg
+leaderboardTitlePartial leaderboard =
     div []
         [ h1 [] [ text leaderboard.title ]
         , div [ class "list-description" ] [ text leaderboard.description ]
         ]
 
 
-leaderboardItem : Int -> LeaderboardItem -> Html Msg
-leaderboardItem index item =
+leaderboardItemPartial : Int -> LeaderboardItem -> Html Msg
+leaderboardItemPartial index item =
     div [ class "top-list-item" ]
         [ div [ class "order" ] [ text (String.fromInt (index + 1)) ]
         , div [ class "composer-work" ]
@@ -183,11 +183,11 @@ view model =
             model.allLeaderboards
     in
     div []
-        [ headerBlock
+        [ headerPartial
         , div
             [ class "content" ]
-            [ menuBlock model leaderboards
-            , contentBlock model
+            [ menuPartial model leaderboards
+            , contentPartial model
             ]
         ]
 
