@@ -5,20 +5,22 @@ $lighter-color: #72848c;
 $highlight-color: #10b1dc;
 $dark-background-color: #122f3b;
 
+$break-small: 600px;
+
+html {
+    font-size: 15px;
+    margin: 0;
+
+    @media screen and (min-width: $break-small) {
+        font-size: 18px;
+    }
+}
+
 body {
     color: $main-color;
     font-family: "Roboto", sans-serif;
     font-weight: 500;
-    font-size: 18px;
-    line-height: 34px;
     margin: 0;
-}
-
-.grid-container {
-    display: grid;
-    grid-template-columns: 1fr 5fr;
-    grid-template-rows: 100px 1fr;
-    grid-template-areas: "header header" "menu content";
 }
 
 header {
@@ -26,28 +28,58 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 1.5rem;
+    text-align: center;
 
-    font-weight: 300;
-    grid-area: header;
+    @media screen and (min-width: $break-small) {
+        text-align: left;
+    }
 }
 
 .title {
-    margin-left: 1.5rem;
-    font-size: 1.8em;
+    background: -webkit-linear-gradient(#0daedf, #2cd3c7);
+    font-size: 2rem;
     font-weight: 400;
     text-transform: uppercase;
-    background: -webkit-linear-gradient(#0daedf, #2cd3c7);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+.subtitle {
+    color: white;
+    font-size: 1rem;
+    font-weight: 300;
+    margin-top: 0.5rem;
 
-section {
-    grid-area: content;
-    padding: 1.5rem;
+    @media screen and (min-width: $break-small) {
+        margin-top: 0;
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (min-width: $break-small) {
+        flex-direction: row;
+    }
 }
 
 aside {
-    grid-area: menu;
+    padding-top: 0;
+    padding-right: 0;
+
+    @media screen and (min-width: $break-small) {
+        padding-top: 0.6rem;
+        padding-right: 1rem;
+    }
+}
+
+section {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+
+    @media screen and (min-width: $break-small) {
+        padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+    }
 }
 
 .selected {
@@ -56,20 +88,44 @@ aside {
 
 .list-description {
     color: $lighter-color;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+
+    @media screen and (min-width: $break-small) {
+        text-align: left;
+    }
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: 1.6rem;
     margin: 0 0 0.5rem 0;
+    text-align: center;
+
+    @media screen and (min-width: $break-small) {
+        margin: 0 0 1rem 0;
+        text-align: left;
+    }
 }
 
 ul {
     list-style-type: none;
-    margin: 1.5rem;
     padding: 0;
+    text-align: center;
+
+    @media screen and (min-width: $break-small) {
+        text-align: left;
+    }
+
     li {
         color: $lighter-color;
+        display: inline-block;
+        margin: 0.4rem 1rem;
+
+        @media screen and (min-width: $break-small) {
+            display: block;
+            margin: 0 0 0.8rem 1.5rem;
+        }
+
         &:hover {
             color: $highlight-color;
             cursor: pointer;
@@ -78,25 +134,27 @@ ul {
 }
 
 .top-list-item {
-    margin-bottom: 0.3rem;
+    display: flex;
+    margin-bottom: 0.8rem;
 }
 
 .order,
 .composer,
-.work {
+.work,
+.composer-work {
     display: inline-block;
 }
 
 .order {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 400;
+    min-width: 2rem;
     padding-right: 1rem;
     text-align: right;
-    width: 2rem;
 }
 
 .composer {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 300;
     margin-right: 0.8rem;
 }

@@ -92,11 +92,12 @@ listElemFull topList =
 
 topListItem : Int -> TopListItem -> Html Msg
 topListItem index item =
-    div [ class "top-list-item"]
-        [ 
-          div [ class "order" ] [ text (String.fromInt (index + 1)) ]
-        , div [ class "composer" ] [ text item.composer ]
-        , div [ class "work" ] [ text item.work ]
+    div [ class "top-list-item" ]
+        [ div [ class "order" ] [ text (String.fromInt (index + 1)) ]
+        , div [ class "composer-work" ]
+            [ div [ class "composer" ] [ text item.composer ]
+            , div [ class "work" ] [ text item.work ]
+            ]
         ]
 
 
@@ -120,23 +121,41 @@ getTopListItems slug =
         }
 
 
+headerBlock : Html Msg
+headerBlock =
+    header []
+        [ div [ class "title" ] [ text "Talkclassical Top Lists" ]
+        , div [ class "subtitle" ] [ text "Best works of classical music as voted by talkclassical.com members" ]
+        ]
+
+
+menuBlock : Model -> List TopList -> Html Msg
+menuBlock model topLists =
+    aside []
+        [ ul [] (List.map (listElemShort model.selectedListSlug) topLists)
+        ]
+
+
+contentBlock : Model -> Html Msg
+contentBlock model =
+    section []
+        [ listElemFull (getListBySlug model.allTopLists model.selectedListSlug)
+        , div [] (List.indexedMap topListItem model.currentTopListItems)
+        ]
+
+
 view : Model -> Html Msg
 view model =
     let
         topLists =
             model.allTopLists
     in
-    div [ class "grid-container" ]
-        [ header []
-            [ div [ class "title" ] [ text "Talkclassical Top Lists" ]
-            , div [] [ text model.error ]
-            ]
-        , section []
-            [ listElemFull (getListBySlug model.allTopLists model.selectedListSlug)
-            , div [] (List.indexedMap topListItem model.currentTopListItems)
-            ]
-        , aside []
-            [ ul [] (List.map (listElemShort model.selectedListSlug) topLists)
+    div []
+        [ headerBlock
+        , div
+            [ class "content" ]
+            [ menuBlock model topLists
+            , contentBlock model
             ]
         ]
 
