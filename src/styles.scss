@@ -90,6 +90,7 @@ header {
 aside {
     padding-top: 0;
     padding-right: 0;
+    min-width: 14rem;
 
     @media screen and (min-width: $break-small) {
         padding-top: 0.6rem;
