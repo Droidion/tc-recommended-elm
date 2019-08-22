@@ -1,0 +1,802 @@
+[
+  {
+    "composer": "Wagner",
+    "work": "Der Ring des Nibelungen"
+  },
+  {
+    "composer": "Mozart",
+    "work": "Don Giovanni"
+  },
+  {
+    "composer": "Wagner",
+    "work": "Tristan und Isolde"
+  },
+  {
+    "composer": "Mozart",
+    "work": "Le nozze di Figaro"
+  },
+  {
+    "composer": "Verdi",
+    "work": "Don Carlos"
+  },
+  {
+    "composer": "Mozart",
+    "work": "Die Zauberflöte"
+  },
+  {
+    "composer": "Debussy",
+    "work": "Pelléas et Mélisande"
+  },
+  {
+    "composer": "Berg",
+    "work": "Wozzeck"
+  },
+  {
+    "composer": "Monteverdi",
+    "work": "L’Orfeo"
+  },
+  {
+    "composer": "Bartók",
+    "work": "Bluebeard’s Castle"
+  },
+  {
+    "composer": "Mozart",
+    "work": "Così fan tutte"
+  },
+  {
+    "composer": "Wagner",
+    "work": "Parsifal"
+  },
+  {
+    "composer": "Verdi",
+    "work": "Otello"
+  },
+  {
+    "composer": "Wagner",
+    "work": "Die Meistersinger von Nürnberg"
+  },
+  {
+    "composer": "Bizet",
+    "work": "Carmen"
+  },
+  {
+    "composer": "Verdi",
+    "work": "La traviata"
+  },
+  {
+    "composer": "Puccini",
+    "work": "La bohème"
+  },
+  {
+    "composer": "Verdi",
+    "work": "Rigoletto"
+  },
+  {
+    "composer": "Puccini",
+    "work": "Madama Butterfly"
+  },
+  {
+    "composer": "Strauss",
+    "work": "Der Rosenkavalier"
+  },
+  {
+    "composer": "Rossini",
+    "work": "Il barbiere di Siviglia"
+  },
+  {
+    "composer": "Wagner",
+    "work": "Lohengrin"
+  },
+  {
+    "composer": "Mussorgsky",
+    "work": "Boris Godunov"
+  },
+  {
+    "composer": "Bellini",
+    "work": "Norma"
+  },
+  {
+    "composer": "Donizetti",
+    "work": "Lucia di Lammermoor"
+  },
+  {
+    "composer": "Britten",
+    "work": "Peter Grimes"
+  },
+  {
+    "composer": "Puccini",
+    "work": "Tosca"
+  },
+  {
+    "composer": "Schoenberg",
+    "work": "Moses und Aron"
+  },
+  {
+    "composer": "Puccini",
+    "work": "Turandot"
+  },
+  {
+    "composer": "Tchaikovsky",
+    "work": "Eugene Onegin"
+  },
+  {
+    "composer": "Verdi",
+    "work": "Aida"
+  },
+  {
+    "composer": "Strauss",
+    "work": "Salome"
+  },
+  {
+    "composer": "Rossini",
+    "work": "La Cenerentola"
+  },
+  {
+    "composer": "Beethoven",
+    "work": "Fidelio"
+  },
+  {
+    "composer": "Gershwin",
+    "work": "Porgy and Bess"
+  },
+  {
+    "composer": "Verdi",
+    "work": "Il trovatore"
+  },
+  {
+    "composer": "Puccini",
+    "work": "La fanciulla del West"
+  },
+  {
+    "composer": "Wagner",
+    "work": "Der fliegende Holländer"
+  },
+  {
+    "composer": "Saariaho",
+    "work": "L'Amour de loin"
+  },
+  {
+    "composer": "Offenbach",
+    "work": "Les contes d'Hoffmann"
+  },
+  {
+    "composer": "Gounod",
+    "work": "Faust"
+  },
+  {
+    "composer": "Handel",
+    "work": "Giulio Cesare"
+  },
+  {
+    "composer": "Mozart",
+    "work": "Die Entführung aus dem Serail"
+  },
+  {
+    "composer": "Wagner",
+    "work": "Tannhäuser"
+  },
+  {
+    "composer": "Janáček",
+    "work": "Jenůfa"
+  },
+  {
+    "composer": "Rossini",
+    "work": "Guillaume Tell"
+  },
+  {
+    "composer": "Purcell",
+    "work": "Dido and Aeneas"
+  },
+  {
+    "composer": "Berg",
+    "work": "Lulu"
+  },
+  {
+    "composer": "Adams",
+    "work": "Nixon in China"
+  },
+  {
+    "composer": "Donizetti",
+    "work": "L'elisir d'amore"
+  },
+  {
+    "composer": "Mascagni",
+    "work": "Cavalleria Rusticana"
+  },
+  {
+    "composer": "Monteverdi",
+    "work": "L'incoronazione di Poppea"
+  },
+  {
+    "composer": "Verdi",
+    "work": "Falstaff"
+  },
+  {
+    "composer": "Gluck",
+    "work": "Orfeo ed Euridice"
+  },
+  {
+    "composer": "Leoncavallo",
+    "work": "Pagliacci"
+  },
+  {
+    "composer": "Berlioz",
+    "work": "Les Troyens"
+  },
+  {
+    "composer": "Weber",
+    "work": "Der Freischütz"
+  },
+  {
+    "composer": "Rameau",
+    "work": "Les Indes galantes"
+  },
+  {
+    "composer": "Ravel",
+    "work": "L'enfant et les sortilèges"
+  },
+  {
+    "composer": "Messiaen",
+    "work": "Saint François d'Assise"
+  },
+  {
+    "composer": "Strauss",
+    "work": "Elektra"
+  },
+  {
+    "composer": "Puccini",
+    "work": "Il trittico"
+  },
+  {
+    "composer": "Stravinsky",
+    "work": "The Rake’s Progress"
+  },
+  {
+    "composer": "Mozart",
+    "work": "Idomeneo"
+  },
+  {
+    "composer": "Britten",
+    "work": "The Turn of the Screw"
+  },
+  {
+    "composer": "Massenet",
+    "work": "Werther"
+  },
+  {
+    "composer": "Shostakovich",
+    "work": "Lady Macbeth of the Mtsensk District"
+  },
+  {
+    "composer": "Dvořák",
+    "work": "Rusalka"
+  },
+  {
+    "composer": "Smetana",
+    "work": "The Bartered Bride"
+  },
+  {
+    "composer": "Ligeti",
+    "work": "Le grand macabre"
+  },
+  {
+    "composer": "Janáček",
+    "work": "The Cunning Little Vixen"
+  },
+  {
+    "composer": "Verdi",
+    "work": "Un ballo in maschera"
+  },
+  {
+    "composer": "Poulenc",
+    "work": "Dialogues des carmélites"
+  },
+  {
+    "composer": "Bellini",
+    "work": "La sonnambula"
+  },
+  {
+    "composer": "Boito",
+    "work": "Mefistofele"
+  },
+  {
+    "composer": "Glass",
+    "work": "Satyagraha"
+  },
+  {
+    "composer": "Glass",
+    "work": "Einstein on the Beach"
+  },
+  {
+    "composer": "Rossini",
+    "work": "L'italiana in Algeri"
+  },
+  {
+    "composer": "Verdi",
+    "work": "La forza del destino "
+  },
+  {
+    "composer": "Mussorgsky",
+    "work": "Khovanshchina"
+  },
+  {
+    "composer": "Verdi",
+    "work": "Macbeth"
+  },
+  {
+    "composer": "Donizetti",
+    "work": "Don Pasquale"
+  },
+  {
+    "composer": "Bellini",
+    "work": "I puritani"
+  },
+  {
+    "composer": "Britten",
+    "work": "Billy Budd"
+  },
+  {
+    "composer": "Giordano",
+    "work": "Andrea Chénier"
+  },
+  {
+    "composer": "Strauss II",
+    "work": "Die Fledermaus"
+  },
+  {
+    "composer": "Massenet",
+    "work": "Manon"
+  },
+  {
+    "composer": "Strauss",
+    "work": "Die Frau ohne Schatten"
+  },
+  {
+    "composer": "Janáček",
+    "work": "From the House of the Dead"
+  },
+  {
+    "composer": "Glass",
+    "work": "Akhnaten"
+  },
+  {
+    "composer": "Gounod",
+    "work": "Roméo et Juliette"
+  },
+  {
+    "composer": "Verdi",
+    "work": "Simon Boccanegra"
+  },
+  {
+    "composer": "Verdi",
+    "work": "Nabucco"
+  },
+  {
+    "composer": "Borodin",
+    "work": "Prince Igor"
+  },
+  {
+    "composer": "Prokofiev",
+    "work": "The Fiery Angel"
+  },
+  {
+    "composer": "Gluck",
+    "work": "Iphigénie en Tauride"
+  },
+  {
+    "composer": "Schoenberg",
+    "work": "Erwartung"
+  },
+  {
+    "composer": "Humperdinck",
+    "work": "Hänsel und Gretel"
+  },
+  {
+    "composer": "Bizet",
+    "work": "Les pêcheurs de perles"
+  },
+  {
+    "composer": "Meyerbeer",
+    "work": "Les Huguenots"
+  },
+  {
+    "composer": "Mozart",
+    "work": "La clemenza di Tito"
+  },
+  {
+    "composer": "Donizetti",
+    "work": "La fille du régiment"
+  },
+  {
+    "composer": "Strauss",
+    "work": "Ariadne auf Naxos"
+  },
+  {
+    "composer": "Donizetti",
+    "work": "Maria Stuarda"
+  },
+  {
+    "composer": "Puccini",
+    "work": "La rondine"
+  },
+  {
+    "composer": "Stravinsky",
+    "work": "Oedipus Rex"
+  },
+  {
+    "composer": "Rameau",
+    "work": "Castor et Pollux"
+  },
+  {
+    "composer": "Prokofiev",
+    "work": "L'amour des trois oranges"
+  },
+  {
+    "composer": "Stockhausen",
+    "work": "Licht"
+  },
+  {
+    "composer": "Shostakovich",
+    "work": "The Nose"
+  },
+  {
+    "composer": "Puccini",
+    "work": "Manon Lescaut "
+  },
+  {
+    "composer": "Donizetti",
+    "work": "Anna Bolena "
+  },
+  {
+    "composer": "Saint-Saëns",
+    "work": "Samson et Dalila"
+  },
+  {
+    "composer": "Weill",
+    "work": "Die Dreigroschenoper"
+  },
+  {
+    "composer": "Tchaikovsky",
+    "work": "The Queen of Spades"
+  },
+  {
+    "composer": "Janáček",
+    "work": "Káťa Kabanová"
+  },
+  {
+    "composer": "Delibes",
+    "work": "Lakmé"
+  },
+  {
+    "composer": "Britten",
+    "work": "Death in Venice"
+  },
+  {
+    "composer": "Rossini",
+    "work": "La donna del lago"
+  },
+  {
+    "composer": "Adès",
+    "work": "The Tempest"
+  },
+  {
+    "composer": "Korngold",
+    "work": "Die tote Stadt"
+  },
+  {
+    "composer": "Berlioz",
+    "work": "La damnation de Faust"
+  },
+  {
+    "composer": "Handel",
+    "work": "Alcina"
+  },
+  {
+    "composer": "Prokofiev",
+    "work": "War and Peace"
+  },
+  {
+    "composer": "Adams",
+    "work": "The Death of Klinghoffer"
+  },
+  {
+    "composer": "Offenbach",
+    "work": "Orphée aux enfers"
+  },
+  {
+    "composer": "Bellini",
+    "work": "I Capuleti e i Montecchi"
+  },
+  {
+    "composer": "Cilea",
+    "work": "Adriana Lecouvreur"
+  },
+  {
+    "composer": "Zimmermann",
+    "work": "Die Soldaten"
+  },
+  {
+    "composer": "Monteverdi",
+    "work": "Il ritorno d'Ulisse in patria"
+  },
+  {
+    "composer": "Rimsky-Korsakov",
+    "work": "Sadko"
+  },
+  {
+    "composer": "Rossini",
+    "work": "Le comte Ory"
+  },
+  {
+    "composer": "Massenet",
+    "work": "Thaïs"
+  },
+  {
+    "composer": "Falla",
+    "work": "La vida breve"
+  },
+  {
+    "composer": "Berlioz",
+    "work": "Benvenuto Cellini"
+  },
+  {
+    "composer": "Strauss",
+    "work": "Capriccio"
+  },
+  {
+    "composer": "Reimann",
+    "work": "Lear"
+  },
+  {
+    "composer": "Adams",
+    "work": "Doctor Atomic"
+  },
+  {
+    "composer": "Britten",
+    "work": "A Midsummer Night's Dream"
+  },
+  {
+    "composer": "Halévy",
+    "work": "La Juive"
+  },
+  {
+    "composer": "Verdi",
+    "work": "Ernani"
+  },
+  {
+    "composer": "Tchaikovsky",
+    "work": "Iolanta"
+  },
+  {
+    "composer": "Cherubini",
+    "work": "Médée"
+  },
+  {
+    "composer": "Busoni",
+    "work": "Doktor Faust"
+  },
+  {
+    "composer": "Hindemith",
+    "work": "Mathis der Maler"
+  },
+  {
+    "composer": "Thomas",
+    "work": "Mignon"
+  },
+  {
+    "composer": "Berlioz",
+    "work": "Béatrice et Bénédict"
+  },
+  {
+    "composer": "Lully",
+    "work": "Armide"
+  },
+  {
+    "composer": "Strauss",
+    "work": "Arabella"
+  },
+  {
+    "composer": "Nono",
+    "work": "Prometeo"
+  },
+  {
+    "composer": "Janáček",
+    "work": "The Makropulos Case"
+  },
+  {
+    "composer": "Verdi",
+    "work": "Luisa Miller"
+  },
+  {
+    "composer": "Verdi",
+    "work": "I vespri siciliani"
+  },
+  {
+    "composer": "Enescu",
+    "work": "Œdipe"
+  },
+  {
+    "composer": "Lehár",
+    "work": "Die lustige Witwe"
+  },
+  {
+    "composer": "Barber",
+    "work": "Vanessa"
+  },
+  {
+    "composer": "Verdi",
+    "work": "Stiffelio"
+  },
+  {
+    "composer": "Handel",
+    "work": "Ariodante"
+  },
+  {
+    "composer": "Lully",
+    "work": "Thésée"
+  },
+  {
+    "composer": "Reich",
+    "work": "The Cave"
+  },
+  {
+    "composer": "Rimsky-Korsakov",
+    "work": "The Golden Cockerel"
+  },
+  {
+    "composer": "Partch",
+    "work": "Delusion of the Fury"
+  },
+  {
+    "composer": "Dallapiccola",
+    "work": "Il prigioniero"
+  },
+  {
+    "composer": "Wagner",
+    "work": "Rienzi"
+  },
+  {
+    "composer": "Thomson",
+    "work": "Four Saints in Three Acts"
+  },
+  {
+    "composer": "Gluck",
+    "work": "Alceste"
+  },
+  {
+    "composer": "Purcell",
+    "work": "King Arthur"
+  },
+  {
+    "composer": "Feldman",
+    "work": "Neither"
+  },
+  {
+    "composer": "Lachenmann",
+    "work": "Das Mädchen mit den Schwefelhölzern"
+  },
+  {
+    "composer": "Strauss",
+    "work": "Daphne"
+  },
+  {
+    "composer": "Handel",
+    "work": "Rodelinda"
+  },
+  {
+    "composer": "Meyerbeer",
+    "work": "L'Africaine"
+  },
+  {
+    "composer": "Charpentier",
+    "work": "Louise"
+  },
+  {
+    "composer": "Weill",
+    "work": "Aufstieg und Fall der Stadt Mahagonny"
+  },
+  {
+    "composer": "Weber",
+    "work": "Euryanthe"
+  },
+  {
+    "composer": "Zandonai",
+    "work": "Francesca da Rimini"
+  },
+  {
+    "composer": "Pergolesi",
+    "work": "La serva padrona"
+  },
+  {
+    "composer": "Rameau",
+    "work": "Hippolyte et Aricie"
+  },
+  {
+    "composer": "Heggie",
+    "work": "Moby-Dick"
+  },
+  {
+    "composer": "Benjamin",
+    "work": "Written on Skin"
+  },
+  {
+    "composer": "Rossini",
+    "work": "Il turco in Italia"
+  },
+  {
+    "composer": "Schubert",
+    "work": "Fierrabras"
+  },
+  {
+    "composer": "Gluck",
+    "work": "Iphigénie en Aulide"
+  },
+  {
+    "composer": "Montemezzi",
+    "work": "L'amore dei tre re"
+  },
+  {
+    "composer": "Poulenc",
+    "work": "La voix humaine"
+  },
+  {
+    "composer": "Ravel",
+    "work": "L'heure espagnole"
+  },
+  {
+    "composer": "Romitelli",
+    "work": "An Index of Metals"
+  },
+  {
+    "composer": "Handel",
+    "work": "Rinaldo"
+  },
+  {
+    "composer": "Britten",
+    "work": "Albert Herring"
+  },
+  {
+    "composer": "Szymanowski",
+    "work": "King Roger"
+  },
+  {
+    "composer": "Ponchielli",
+    "work": "La Gioconda"
+  },
+  {
+    "composer": "Rossini",
+    "work": "Semiramide"
+  },
+  {
+    "composer": "Menotti",
+    "work": "The Consul"
+  },
+  {
+    "composer": "Delius",
+    "work": "A Village Romeo and Juliet"
+  },
+  {
+    "composer": "Bellini",
+    "work": "Il pirata"
+  },
+  {
+    "composer": "Donizetti",
+    "work": "Poliuto"
+  },
+  {
+    "composer": "Rossini",
+    "work": "Otello"
+  },
+  {
+    "composer": "Previn",
+    "work": "A Streetcar Named Desire"
+  },
+  {
+    "composer": "Britten",
+    "work": "The Rape of Lucretia"
+  },
+  {
+    "composer": "Rossini",
+    "work": "Armida"
+  }
+]

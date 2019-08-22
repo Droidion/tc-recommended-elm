@@ -6,6 +6,7 @@ leaderboards =
     , { title = "Chamber Duos", description = "Top Chamber Duos", slug = "chamber-duos-100" }
     , { title = "Choral", description = "Top Choral", slug = "choral-100" }
     , { title = "Keyboard Concerti", description = "Top Keyboard Concerti", slug = "keyboard-concerti-100" }
+    , { title = "Operas (2015 version)", description = "Top Operas", slug = "operas-v2015-200" }
     , { title = "Orchestral", description = "Top Orchestral", slug = "orchestral-200" }
     , { title = "Piano Chamber", description = "Top Piano Chamber", slug = "piano-chamber-50" }
     , { title = "Piano Trios", description = "Top Piano Trios", slug = "piano-trios-125" }
