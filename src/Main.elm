@@ -6,17 +6,21 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Http
 import Json.Decode exposing (Decoder, field, list, map2, string)
-import TopList
+import Leaderboard
 
 
-type alias TopList =
+
+-- TYPE ALIASES
+
+
+type alias Leaderboard =
     { description : String
     , slug : String
     , title : String
     }
 
 
-type alias TopListItem =
+type alias LeaderboardItem =
     { composer : String
     , work : String
     }
@@ -24,26 +28,38 @@ type alias TopListItem =
 
 type alias Model =
     { selectedListSlug : String
-    , allTopLists : List TopList
-    , currentTopListItems : List TopListItem
+    , allLeaderboards : List Leaderboard
+    , currentLeaderboardItems : List LeaderboardItem
     , error : String
     }
 
 
+
+-- TYPES
+
+
 type Msg
-    = ClickedTopListSlug String
-    | GotJson (Result Http.Error (List TopListItem))
+    = ClickedLeaderboardSlug String
+    | GotJson (Result Http.Error (List LeaderboardItem))
+
+
+
+-- MODEL
 
 
 initialModel : () -> ( Model, Cmd Msg )
 initialModel _ =
     ( { selectedListSlug = "keyboard-concerti-100"
-      , allTopLists = TopList.lists
-      , currentTopListItems = []
+      , allLeaderboards = Leaderboard.leaderboards
+      , currentLeaderboardItems = []
       , error = ""
       }
-    , getTopListItems "keyboard-concerti-100"
+    , getLeaderboardItems "keyboard-concerti-100"
     )
+
+
+
+-- SUBSCRIPTIONS
 
 
 subscriptions : Model -> Sub Msg
@@ -51,11 +67,15 @@ subscriptions model =
     Sub.none
 
 
-getListBySlug : List TopList -> String -> TopList
-getListBySlug allTopLists slug =
+
+-- HELPER FUNCTIONS
+
+
+getListBySlug : List Leaderboard -> String -> Leaderboard
+getListBySlug allLeaderboards slug =
     let
         list =
-            allTopLists
+            allLeaderboards
                 |> List.filter (\l -> l.slug == slug)
                 |> List.head
     in
@@ -67,58 +87,36 @@ getListBySlug allTopLists slug =
             { title = "", description = "", slug = "" }
 
 
-listElemShort : String -> TopList -> Html Msg
-listElemShort currentSlug topList =
-    li
-        [ onClick (ClickedTopListSlug topList.slug)
-        , class
-            (if topList.slug == currentSlug then
-                "selected"
 
-             else
-                ""
-            )
-        ]
-        [ text topList.title ]
+-- JSON decoders
 
 
-listElemFull : TopList -> Html Msg
-listElemFull topList =
-    div []
-        [ h1 [] [ text topList.title ]
-        , div [ class "list-description" ] [ text topList.description ]
-        ]
-
-
-topListItem : Int -> TopListItem -> Html Msg
-topListItem index item =
-    div [ class "top-list-item" ]
-        [ div [ class "order" ] [ text (String.fromInt (index + 1)) ]
-        , div [ class "composer-work" ]
-            [ div [ class "composer" ] [ text item.composer ]
-            , div [ class "work" ] [ text item.work ]
-            ]
-        ]
-
-
-topListItemDecoder : Decoder TopListItem
-topListItemDecoder =
-    map2 TopListItem
+leaderboardItemDecoder : Decoder LeaderboardItem
+leaderboardItemDecoder =
+    map2 LeaderboardItem
         (field "composer" string)
         (field "work" string)
 
 
-topListItemsDecoder : Decoder (List TopListItem)
-topListItemsDecoder =
-    list topListItemDecoder
+leaderboardDecoder : Decoder (List LeaderboardItem)
+leaderboardDecoder =
+    list leaderboardItemDecoder
 
 
-getTopListItems : String -> Cmd Msg
-getTopListItems slug =
+
+-- COMMANDS
+
+
+getLeaderboardItems : String -> Cmd Msg
+getLeaderboardItems slug =
     Http.get
         { url = "/json/" ++ slug ++ ".json"
-        , expect = Http.expectJson GotJson topListItemsDecoder
+        , expect = Http.expectJson GotJson leaderboardDecoder
         }
+
+
+
+-- VIEWS
 
 
 headerBlock : Html Msg
@@ -129,50 +127,92 @@ headerBlock =
         ]
 
 
-menuBlock : Model -> List TopList -> Html Msg
-menuBlock model topLists =
+menuBlock : Model -> List Leaderboard -> Html Msg
+menuBlock model leaderboards =
     aside []
-        [ ul [ class "menu" ] (List.map (listElemShort model.selectedListSlug) topLists)
+        [ ul [ class "menu" ] (List.map (listElemShort model.selectedListSlug) leaderboards)
         ]
 
 
 contentBlock : Model -> Html Msg
 contentBlock model =
     section []
-        [ listElemFull (getListBySlug model.allTopLists model.selectedListSlug)
-        , div [] (List.indexedMap topListItem model.currentTopListItems)
+        [ listElemFull (getListBySlug model.allLeaderboards model.selectedListSlug)
+        , div [] (List.indexedMap leaderboardItem model.currentLeaderboardItems)
+        ]
+
+
+listElemShort : String -> Leaderboard -> Html Msg
+listElemShort currentSlug leaderboard =
+    li
+        [ onClick (ClickedLeaderboardSlug leaderboard.slug)
+        , class
+            (if leaderboard.slug == currentSlug then
+                "selected"
+
+             else
+                ""
+            )
+        ]
+        [ text leaderboard.title ]
+
+
+listElemFull : Leaderboard -> Html Msg
+listElemFull leaderboard =
+    div []
+        [ h1 [] [ text leaderboard.title ]
+        , div [ class "list-description" ] [ text leaderboard.description ]
+        ]
+
+
+leaderboardItem : Int -> LeaderboardItem -> Html Msg
+leaderboardItem index item =
+    div [ class "top-list-item" ]
+        [ div [ class "order" ] [ text (String.fromInt (index + 1)) ]
+        , div [ class "composer-work" ]
+            [ div [ class "composer" ] [ text item.composer ]
+            , div [ class "work" ] [ text item.work ]
+            ]
         ]
 
 
 view : Model -> Html Msg
 view model =
     let
-        topLists =
-            model.allTopLists
+        leaderboards =
+            model.allLeaderboards
     in
     div []
         [ headerBlock
         , div
             [ class "content" ]
-            [ menuBlock model topLists
+            [ menuBlock model leaderboards
             , contentBlock model
             ]
         ]
 
 
+
+-- UPDATE
+
+
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        ClickedTopListSlug slugName ->
-            ( { model | selectedListSlug = slugName }, getTopListItems slugName )
+        ClickedLeaderboardSlug slugName ->
+            ( { model | selectedListSlug = slugName }, getLeaderboardItems slugName )
 
         GotJson result ->
             case result of
                 Ok items ->
-                    ( { model | currentTopListItems = items, error = "" }, Cmd.none )
+                    ( { model | currentLeaderboardItems = items, error = "" }, Cmd.none )
 
                 Err _ ->
-                    ( { model | currentTopListItems = [], error = "Could not load JSON data" }, Cmd.none )
+                    ( { model | currentLeaderboardItems = [], error = "Could not load JSON data" }, Cmd.none )
+
+
+
+-- MAIN
 
 
 main =

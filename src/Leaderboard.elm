@@ -1,7 +1,7 @@
-module TopList exposing (lists)
+module Leaderboard exposing (leaderboards)
 
 
-lists =
+leaderboards =
     [ { title = "Art Songs", description = "Top Art Songs", slug = "art-songs-100" }
     , { title = "Chamber Duos", description = "Top Chamber Duos", slug = "chamber-duos-100" }
     , { title = "Choral", description = "Top Choral", slug = "choral-100" }
