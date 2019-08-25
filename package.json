@@ -1,7 +1,7 @@
 {
   "name": "tc-recommended",
   "version": "0.0.1",
-  "description": "Recommded lists of classical music works, composed by talkclassical.com members",
+  "description": "Recommended lists of classical music works, composed by talkclassical.com members",
   "main": "index.js",
   "scripts": {
     "test": "elm-test",
