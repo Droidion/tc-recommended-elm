@@ -17,9 +17,8 @@ For building everything and starting Go server
 ```
 $ yarn install
 $ yarn prod
-$ go build -o dist/server src/cmd/main.go
-$ cd dist
-$ ./server
+$ yarn go
+$ yarn server
 ```
 
 For frontend development:

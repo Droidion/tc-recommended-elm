@@ -8,6 +8,8 @@
     "start": "npm run dev",
     "dev": "webpack-dev-server --hot --colors --port 3000",
     "build": "webpack",
+    "go": "go build -o dist/server src/cmd/main.go",
+    "server": "cd dist && ./server",
     "prod": "webpack -p",
     "analyse": "elm-analyse -s -p 3001 -o"
   },
