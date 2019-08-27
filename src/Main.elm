@@ -5,8 +5,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Http
-import Json.Decode exposing (Decoder, field, list, map2, string)
-import Leaderboard
+import Json.Decode exposing (Decoder, field, list, map2, map3, string)
 
 
 
@@ -16,7 +15,7 @@ import Leaderboard
 type alias Leaderboard =
     { description : String
     , slug : String
-    , title : String
+    , name : String
     }
 
 
@@ -40,7 +39,8 @@ type alias Model =
 
 type Msg
     = ClickedLeaderboardSlug String
-    | GotJson (Result Http.Error (List LeaderboardItem))
+    | GotJsonLeaderboardContent (Result Http.Error (List LeaderboardItem))
+    | GotJsonLeaderboards (Result Http.Error (List Leaderboard))
 
 
 
@@ -50,11 +50,11 @@ type Msg
 initialModel : () -> ( Model, Cmd Msg )
 initialModel _ =
     ( { selectedListSlug = "keyboard-concerti"
-      , allLeaderboards = Leaderboard.leaderboards
+      , allLeaderboards = []
       , currentLeaderboardItems = []
       , error = ""
       }
-    , getLeaderboardItems "keyboard-concerti"
+    , getLeaderboards
     )
 
 
@@ -84,23 +84,36 @@ getListBySlug allLeaderboards slug =
             val
 
         Nothing ->
-            { title = "", description = "", slug = "" }
+            { name = "", description = "", slug = "" }
 
 
 
 -- JSON decoders
 
 
-leaderboardItemDecoder : Decoder LeaderboardItem
-leaderboardItemDecoder =
+singleWorkDecoder : Decoder LeaderboardItem
+singleWorkDecoder =
     map2 LeaderboardItem
         (field "composer" string)
         (field "work" string)
 
 
-leaderboardDecoder : Decoder (List LeaderboardItem)
+leaderboardDecoder : Decoder Leaderboard
 leaderboardDecoder =
-    list leaderboardItemDecoder
+    map3 Leaderboard
+        (field "description" string)
+        (field "slug" string)
+        (field "name" string)
+
+
+leaderboardContentDecoder : Decoder (List LeaderboardItem)
+leaderboardContentDecoder =
+    list singleWorkDecoder
+
+
+leaderboardsListDecoder : Decoder (List Leaderboard)
+leaderboardsListDecoder =
+    list leaderboardDecoder
 
 
 
@@ -111,7 +124,15 @@ getLeaderboardItems : String -> Cmd Msg
 getLeaderboardItems slug =
     Http.get
         { url = "/api/leaderboard/" ++ slug
-        , expect = Http.expectJson GotJson leaderboardDecoder
+        , expect = Http.expectJson GotJsonLeaderboardContent leaderboardContentDecoder
+        }
+
+
+getLeaderboards : Cmd Msg
+getLeaderboards =
+    Http.get
+        { url = "/api/leaderboards"
+        , expect = Http.expectJson GotJsonLeaderboards leaderboardsListDecoder
         }
 
 
@@ -130,7 +151,8 @@ headerPartial =
 menuPartial : Model -> List Leaderboard -> Html Msg
 menuPartial model leaderboards =
     aside []
-        [ ul [ class "menu" ] (List.map (menuItemPartial model.selectedListSlug) leaderboards)
+        [ div [] [ text model.error ]
+        , ul [ class "menu" ] (List.map (menuItemPartial model.selectedListSlug) leaderboards)
         ]
 
 
@@ -146,7 +168,7 @@ menuItemPartial currentSlug leaderboard =
                 ""
             )
         ]
-        [ text leaderboard.title ]
+        [ text leaderboard.name ]
 
 
 contentPartial : Model -> Html Msg
@@ -160,7 +182,7 @@ contentPartial model =
 leaderboardTitlePartial : Leaderboard -> Html Msg
 leaderboardTitlePartial leaderboard =
     div []
-        [ h1 [] [ text leaderboard.title ]
+        [ h1 [] [ text leaderboard.name ]
         , div [ class "list-description" ] [ text leaderboard.description ]
         ]
 
@@ -202,13 +224,21 @@ update msg model =
         ClickedLeaderboardSlug slugName ->
             ( { model | selectedListSlug = slugName }, getLeaderboardItems slugName )
 
-        GotJson result ->
+        GotJsonLeaderboardContent result ->
             case result of
                 Ok items ->
                     ( { model | currentLeaderboardItems = items, error = "" }, Cmd.none )
 
                 Err _ ->
                     ( { model | currentLeaderboardItems = [], error = "Could not load JSON data" }, Cmd.none )
+
+        GotJsonLeaderboards result ->
+            case result of
+                Ok items ->
+                    ( { model | allLeaderboards = items, error = "" }, getLeaderboardItems model.selectedListSlug )
+
+                Err _ ->
+                    ( { model | allLeaderboards = [], error = "Could not load JSON data" }, Cmd.none )
 
 
 
