@@ -49,12 +49,12 @@ type Msg
 
 initialModel : () -> ( Model, Cmd Msg )
 initialModel _ =
-    ( { selectedListSlug = "keyboard-concerti-100"
+    ( { selectedListSlug = "keyboard-concerti"
       , allLeaderboards = Leaderboard.leaderboards
       , currentLeaderboardItems = []
       , error = ""
       }
-    , getLeaderboardItems "keyboard-concerti-100"
+    , getLeaderboardItems "keyboard-concerti"
     )
 
 
@@ -110,7 +110,7 @@ leaderboardDecoder =
 getLeaderboardItems : String -> Cmd Msg
 getLeaderboardItems slug =
     Http.get
-        { url = "/json/" ++ slug ++ ".json"
+        { url = "/api/leaderboard/" ++ slug
         , expect = Http.expectJson GotJson leaderboardDecoder
         }
 

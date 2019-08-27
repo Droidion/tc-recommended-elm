@@ -21,8 +21,6 @@ func main() {
 
 	r := mux.NewRouter()
 
-	http.Handle("/", http.StripPrefix("/", http.FileServer(http.Dir("assets/"))))
-
 	r.HandleFunc("/api/leaderboards", func(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(loadLeaderboardsList(db))
 	})
@@ -30,6 +28,8 @@ func main() {
 	r.HandleFunc("/api/leaderboard/{slug}", func(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(loadLeaderboardContent(db, mux.Vars(r)["slug"]))
 	})
+
+	r.PathPrefix("/").Handler(http.StripPrefix("", http.FileServer(http.Dir("assets/"))))
 
 	fmt.Println("Listening to localhost port 8080...")
 	http.ListenAndServe(":8080", r)
