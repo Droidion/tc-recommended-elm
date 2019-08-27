@@ -11,6 +11,4 @@ type Leaderboard struct {
 type Work struct {
 	Composer string `json:"composer"`
 	Work     string `json:"work"`
-	Position int    `json:"position"`
-	Slug     string `json:"slug"`
 }

@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-func loadLeaderboards(db *sql.DB) []Leaderboard {
+func loadLeaderboardsList(db *sql.DB) []Leaderboard {
 
 	leaderboards := []Leaderboard{}
 

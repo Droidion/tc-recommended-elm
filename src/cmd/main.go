@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gorilla/mux"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -18,16 +19,19 @@ func main() {
 	}
 	defer db.Close()
 
-	leaderboards := loadLeaderboards(db)
+	r := mux.NewRouter()
 
-	fs := http.FileServer(http.Dir("assets/"))
-	http.Handle("/", http.StripPrefix("/", fs))
+	http.Handle("/", http.StripPrefix("/", http.FileServer(http.Dir("assets/"))))
 
-	http.HandleFunc("/api/leaderboards", func(w http.ResponseWriter, r *http.Request) {
-		json.NewEncoder(w).Encode(leaderboards)
+	r.HandleFunc("/api/leaderboards", func(w http.ResponseWriter, r *http.Request) {
+		json.NewEncoder(w).Encode(loadLeaderboardsList(db))
+	})
+
+	r.HandleFunc("/api/leaderboard/{slug}", func(w http.ResponseWriter, r *http.Request) {
+		json.NewEncoder(w).Encode(loadLeaderboardContent(db, mux.Vars(r)["slug"]))
 	})
 
 	fmt.Println("Listening to localhost port 8080...")
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8080", r)
 
 }
