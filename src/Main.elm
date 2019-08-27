@@ -49,7 +49,7 @@ type Msg
 
 initialModel : () -> ( Model, Cmd Msg )
 initialModel _ =
-    ( { selectedListSlug = "keyboard-concerti"
+    ( { selectedListSlug = ""
       , allLeaderboards = []
       , currentLeaderboardItems = []
       , error = ""
@@ -235,7 +235,22 @@ update msg model =
         GotJsonLeaderboards result ->
             case result of
                 Ok items ->
-                    ( { model | allLeaderboards = items, error = "" }, getLeaderboardItems model.selectedListSlug )
+                    let
+                        firstSlug =
+                            case List.head items of
+                                Just item ->
+                                    item.slug
+
+                                Nothing ->
+                                    ""
+                    in
+                    ( { model
+                        | allLeaderboards = items
+                        , error = ""
+                        , selectedListSlug = firstSlug
+                      }
+                    , getLeaderboardItems firstSlug
+                    )
 
                 Err _ ->
                     ( { model | allLeaderboards = [], error = "Could not load JSON data" }, Cmd.none )
