@@ -61,23 +61,23 @@ Ginastera|Piano Concerto No. 1
 Bach|Harpsichord Concerto No. 7 (BWV 1058)
 Mozart|Piano Concerto No. 26 'Coronation'
 Hummel|Piano Concerto No. 2
-Chopin","work": "Andante spianato et grande polonaise brillante
+Chopin|Andante spianato et grande polonaise brillante
 Ireland|Piano Concerto
-Bach","work": "Concerto for Two Harpsichords No. 1 (BWV 1060)
-Prokofiev","work": "Piano Concerto No. 4 (for the left hand)
+Bach|Concerto for Two Harpsichords No. 1 (BWV 1060)
+Prokofiev|Piano Concerto No. 4 (for the left hand)
 Rachmaninoff|Piano Concerto No. 4
 Mendelssohn|Piano Concerto No. 2
 Bartók|Concerto for Two Pianos
-  {"composer": "Vivaldi-Bach","work": "Concerto for Four Harpsichords (BWV 1065)
+Vivaldi-Bach|Concerto for Four Harpsichords (BWV 1065)
 Rautavaara|Piano Concerto No. 1
 Franck|Symphonic Variations
 Handel|Organ Concerto No. 14 (HWV 296a)
 Medtner|Piano Concerto No. 2
 Poulenc|Concert champêtre
-  {"composer": "Bach","work": "Concerto for Three Harpsichords No. 2 (BWV 1064)
-  {"composer": "Bach","work": "Concerto for Two Harpsichords No. 3 (BWV 1062)
+Bach|Concerto for Three Harpsichords No. 2 (BWV 1064)
+Bach|Concerto for Two Harpsichords No. 3 (BWV 1062)
 Tveitt|Piano Concerto No. 4 'Aurora Borealis'
-  {"composer": "Bach","work": "Concerto for Three Harpsichords No. 1 (BWV 1063)
+Bach|Concerto for Three Harpsichords No. 1 (BWV 1063)
 C.P.E. Bach|Keyboard Concerto in D minor (H 427)
 Schumann|Introduction and Allegro Appassionato
 Mozart|Piano Concerto No. 7 for Three Pianos
@@ -86,7 +86,7 @@ Rautavaara|Piano Concerto No. 3 'Gift of Dreams'
 Vaughan Williams|Piano Concerto
 C. Schumann|Piano Concerto
 Handel|Organ Concerto op. 4 no. 4 (HWV 292)
-  {"composer": "Britten","work": "Diversions for Piano (left hand) and Orchestra
+Britten|Diversions for Piano (left hand) and Orchestra
 Scriabin|Piano Concerto
 Mozart|Piano Concerto No. 18
 Debussy|Fantaisie for Piano and Orchestra
