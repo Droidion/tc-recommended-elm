@@ -20,3 +20,10 @@ type ComposerStats struct {
 	Position int    `json:"position"`
 	Slug     string `json:"slug"`
 }
+
+// ComposerLeaderboardItem : Composer rated by their works
+type ComposerLeaderboardItem struct {
+	ComposerID   int    `json:"composerId"`
+	ComposerName string `json:"composerName"`
+	Rating       int    `json:"rating"`
+}
