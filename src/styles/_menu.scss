@@ -14,7 +14,9 @@ aside {
         text-align: center;
 
         @media screen and (min-width: $break-small) {
+            position: sticky;
             text-align: left;
+            top: 1.5rem;
         }
 
         li {

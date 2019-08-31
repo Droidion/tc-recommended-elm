@@ -1,11 +1,13 @@
 module Main exposing (main)
 
 import Browser
+import Browser.Dom as Dom
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Http
 import Json.Decode exposing (Decoder, field, int, list, map2, map3, string)
+import Task
 
 
 
@@ -61,6 +63,7 @@ type Msg
     | GotJsonLeaderboardContent (Result Http.Error (List LeaderboardItem))
     | GotJsonLeaderboards (Result Http.Error (List Leaderboard))
     | GotJsonComposerStats (Result Http.Error (List ComposerStat))
+    | ClickedRr String
 
 
 
@@ -193,6 +196,11 @@ getComposerStats composerId =
         }
 
 
+resetViewport : String -> Cmd Msg
+resetViewport slug =
+    Task.perform (\_ -> ClickedLeaderboardSlug slug) (Dom.setViewport 0 0)
+
+
 
 -- VIEWS
 
@@ -216,7 +224,7 @@ menuPartial model leaderboards =
 menuItemPartial : String -> Leaderboard -> Html Msg
 menuItemPartial currentSlug leaderboard =
     li
-        [ onClick (ClickedLeaderboardSlug leaderboard.slug)
+        [ onClick (ClickedRr leaderboard.slug)
         , class
             (if leaderboard.slug == currentSlug then
                 "selected"
@@ -319,6 +327,9 @@ update msg model =
 
         ClickedLeaderboardSlug slugName ->
             ( { model | selectedListSlug = slugName }, getLeaderboardItems slugName )
+
+        ClickedRr slugName ->
+            ( model, resetViewport slugName )
 
         GotJsonLeaderboardContent result ->
             case result of
