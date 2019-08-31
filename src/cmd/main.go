@@ -29,6 +29,10 @@ func main() {
 		json.NewEncoder(w).Encode(loadLeaderboardContent(db, mux.Vars(r)["slug"]))
 	})
 
+	r.HandleFunc("/api/composer/{composerID}", func(w http.ResponseWriter, r *http.Request) {
+		json.NewEncoder(w).Encode(loadComposerStats(db, mux.Vars(r)["composerID"]))
+	})
+
 	r.PathPrefix("/").Handler(http.StripPrefix("", http.FileServer(http.Dir("assets/"))))
 
 	fmt.Println("Listening to localhost port 8080...")

@@ -9,7 +9,15 @@ type Leaderboard struct {
 
 // Work : Single work inside a leaderboard
 type Work struct {
-	ComposerID int    `json:"composer_id"`
+	ComposerID int    `json:"composerId"`
 	Composer   string `json:"composer"`
 	Work       string `json:"work"`
+}
+
+// ComposerStats : Work from any list by a single composer
+type ComposerStats struct {
+	Composer string `json:"composer"`
+	Work     string `json:"composerName"`
+	Position int    `json:"position"`
+	Slug     string `json:"slug"`
 }
