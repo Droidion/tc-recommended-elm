@@ -9,7 +9,14 @@ func loadLeaderboardContent(db *sql.DB, slug string) []Work {
 
 	works := []Work{}
 
-	stmt, err := db.Prepare("SELECT composer, work FROM works WHERE slug=? ORDER BY position")
+	stmt, err := db.Prepare(`SELECT 
+		composers.id AS composer_id, 
+		composers.name AS composer, 
+		works.work AS work 
+		FROM works 
+		JOIN composers ON composers.id = works.composer_id 
+		WHERE slug=? 
+		ORDER BY position`)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -19,7 +26,7 @@ func loadLeaderboardContent(db *sql.DB, slug string) []Work {
 	defer rows.Close()
 	for rows.Next() {
 		work := Work{}
-		err = rows.Scan(&work.Composer, &work.Work)
+		err = rows.Scan(&work.ComposerID, &work.Composer, &work.Work)
 		if err != nil {
 			log.Fatal(err)
 		}
