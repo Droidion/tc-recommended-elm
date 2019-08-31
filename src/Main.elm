@@ -5,7 +5,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Http
-import Json.Decode exposing (Decoder, field, list, map2, map3, string)
+import Json.Decode exposing (Decoder, field, int, list, map2, map3, string)
 
 
 
@@ -21,14 +21,31 @@ type alias Leaderboard =
 
 type alias LeaderboardItem =
     { composer : String
+    , composerId : Int
     , work : String
     }
+
+
+type alias ComposerStat =
+    { work : String
+    , position : Int
+    , slug : String
+    }
+
+
+type alias StructuredComposerStats =
+    List
+        { leaderboard : String
+        , works :
+            List ComposerStat
+        }
 
 
 type alias Model =
     { selectedListSlug : String
     , allLeaderboards : List Leaderboard
     , currentLeaderboardItems : List LeaderboardItem
+    , composerStats : List ComposerStat
     , error : String
     }
 
@@ -39,8 +56,10 @@ type alias Model =
 
 type Msg
     = ClickedLeaderboardSlug String
+    | ClickedComposer Int
     | GotJsonLeaderboardContent (Result Http.Error (List LeaderboardItem))
     | GotJsonLeaderboards (Result Http.Error (List Leaderboard))
+    | GotJsonComposerStats (Result Http.Error (List ComposerStat))
 
 
 
@@ -52,6 +71,7 @@ initialModel _ =
     ( { selectedListSlug = ""
       , allLeaderboards = []
       , currentLeaderboardItems = []
+      , composerStats = []
       , error = ""
       }
     , getLeaderboards
@@ -87,14 +107,28 @@ getListBySlug allLeaderboards slug =
             { name = "", description = "", slug = "" }
 
 
+structuredComposerStats : List ComposerStat -> List Leaderboard -> StructuredComposerStats
+structuredComposerStats stats leaderboards =
+    leaderboards
+        |> List.map
+            (\leaderboard ->
+                { leaderboard = leaderboard.name
+                , works = List.filter (\stat -> stat.slug == leaderboard.slug) stats
+                }
+            )
+        |> List.filter
+            (\stat -> not (List.isEmpty stat.works))
+
+
 
 -- JSON decoders
 
 
 singleWorkDecoder : Decoder LeaderboardItem
 singleWorkDecoder =
-    map2 LeaderboardItem
+    map3 LeaderboardItem
         (field "composer" string)
+        (field "composerId" int)
         (field "work" string)
 
 
@@ -106,6 +140,14 @@ leaderboardDecoder =
         (field "name" string)
 
 
+composerStatDecoder : Decoder ComposerStat
+composerStatDecoder =
+    map3 ComposerStat
+        (field "work" string)
+        (field "position" int)
+        (field "slug" string)
+
+
 leaderboardContentDecoder : Decoder (List LeaderboardItem)
 leaderboardContentDecoder =
     list singleWorkDecoder
@@ -114,6 +156,11 @@ leaderboardContentDecoder =
 leaderboardsListDecoder : Decoder (List Leaderboard)
 leaderboardsListDecoder =
     list leaderboardDecoder
+
+
+composerStatsDecoder : Decoder (List ComposerStat)
+composerStatsDecoder =
+    list composerStatDecoder
 
 
 
@@ -133,6 +180,14 @@ getLeaderboards =
     Http.get
         { url = "/api/leaderboards"
         , expect = Http.expectJson GotJsonLeaderboards leaderboardsListDecoder
+        }
+
+
+getComposerStats : Int -> Cmd Msg
+getComposerStats composerId =
+    Http.get
+        { url = "/api/composer/" ++ String.fromInt composerId
+        , expect = Http.expectJson GotJsonComposerStats composerStatsDecoder
         }
 
 
@@ -171,12 +226,43 @@ menuItemPartial currentSlug leaderboard =
         [ text leaderboard.name ]
 
 
-contentPartial : Model -> Html Msg
-contentPartial model =
+leaderboardPartial : Model -> Html Msg
+leaderboardPartial model =
     section []
         [ leaderboardTitlePartial (getListBySlug model.allLeaderboards model.selectedListSlug)
         , div [] (List.indexedMap leaderboardItemPartial model.currentLeaderboardItems)
         ]
+
+
+composerStatsPartial : Model -> Html Msg
+composerStatsPartial model =
+    section []
+        [ composerStatsItemPartial
+            (structuredComposerStats model.composerStats model.allLeaderboards)
+        ]
+
+
+composerStatsItemPartial : StructuredComposerStats -> Html Msg
+composerStatsItemPartial stats =
+    div []
+        (List.map
+            (\stat ->
+                div []
+                    [ h2 [] [ text stat.leaderboard ]
+                    , div []
+                        (List.map
+                            (\work ->
+                                div [ class "top-list-item" ]
+                                    [ div [ class "order" ] [ text (String.fromInt work.position) ]
+                                    , div [ class "composer-work composer" ] [ text work.work ]
+                                    ]
+                            )
+                            stat.works
+                        )
+                    ]
+            )
+            stats
+        )
 
 
 leaderboardTitlePartial : Leaderboard -> Html Msg
@@ -192,7 +278,7 @@ leaderboardItemPartial index item =
     div [ class "top-list-item" ]
         [ div [ class "order" ] [ text (String.fromInt (index + 1)) ]
         , div [ class "composer-work" ]
-            [ div [ class "composer" ] [ text item.composer ]
+            [ div [ class "composer", onClick (ClickedComposer item.composerId) ] [ text item.composer ]
             , div [ class "work" ] [ text item.work ]
             ]
         ]
@@ -209,7 +295,11 @@ view model =
         , div
             [ class "content" ]
             [ menuPartial model leaderboards
-            , contentPartial model
+            , if String.isEmpty model.selectedListSlug then
+                composerStatsPartial model
+
+              else
+                leaderboardPartial model
             ]
         ]
 
@@ -221,6 +311,9 @@ view model =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        ClickedComposer composerId ->
+            ( { model | selectedListSlug = "", currentLeaderboardItems = [] }, getComposerStats composerId )
+
         ClickedLeaderboardSlug slugName ->
             ( { model | selectedListSlug = slugName }, getLeaderboardItems slugName )
 
@@ -231,6 +324,14 @@ update msg model =
 
                 Err _ ->
                     ( { model | currentLeaderboardItems = [], error = "Could not load JSON data" }, Cmd.none )
+
+        GotJsonComposerStats result ->
+            case result of
+                Ok items ->
+                    ( { model | composerStats = items, error = "" }, Cmd.none )
+
+                Err _ ->
+                    ( { model | composerStats = [], error = "Could not load JSON data" }, Cmd.none )
 
         GotJsonLeaderboards result ->
             case result of

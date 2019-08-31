@@ -16,8 +16,7 @@ type Work struct {
 
 // ComposerStats : Work from any list by a single composer
 type ComposerStats struct {
-	Composer string `json:"composer"`
-	Work     string `json:"composerName"`
+	Work     string `json:"work"`
 	Position int    `json:"position"`
 	Slug     string `json:"slug"`
 }
