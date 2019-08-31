@@ -46,6 +46,7 @@ type alias Model =
     , allLeaderboards : List Leaderboard
     , currentLeaderboardItems : List LeaderboardItem
     , composerStats : List ComposerStat
+    , currentComposerName : String
     , error : String
     }
 
@@ -56,7 +57,7 @@ type alias Model =
 
 type Msg
     = ClickedLeaderboardSlug String
-    | ClickedComposer Int
+    | ClickedComposer ( Int, String )
     | GotJsonLeaderboardContent (Result Http.Error (List LeaderboardItem))
     | GotJsonLeaderboards (Result Http.Error (List Leaderboard))
     | GotJsonComposerStats (Result Http.Error (List ComposerStat))
@@ -72,6 +73,7 @@ initialModel _ =
       , allLeaderboards = []
       , currentLeaderboardItems = []
       , composerStats = []
+      , currentComposerName = ""
       , error = ""
       }
     , getLeaderboards
@@ -237,7 +239,8 @@ leaderboardPartial model =
 composerStatsPartial : Model -> Html Msg
 composerStatsPartial model =
     section []
-        [ composerStatsItemPartial
+        [ h1 [] [ text model.currentComposerName ]
+        , composerStatsItemPartial
             (structuredComposerStats model.composerStats model.allLeaderboards)
         ]
 
@@ -278,7 +281,7 @@ leaderboardItemPartial index item =
     div [ class "top-list-item" ]
         [ div [ class "order" ] [ text (String.fromInt (index + 1)) ]
         , div [ class "composer-work" ]
-            [ div [ class "composer", onClick (ClickedComposer item.composerId) ] [ text item.composer ]
+            [ div [ class "composer clickable", onClick (ClickedComposer ( item.composerId, item.composer )) ] [ text item.composer ]
             , div [ class "work" ] [ text item.work ]
             ]
         ]
@@ -311,8 +314,8 @@ view model =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        ClickedComposer composerId ->
-            ( { model | selectedListSlug = "", currentLeaderboardItems = [] }, getComposerStats composerId )
+        ClickedComposer ( composerId, composerName ) ->
+            ( { model | selectedListSlug = "", currentLeaderboardItems = [], currentComposerName = composerName }, getComposerStats composerId )
 
         ClickedLeaderboardSlug slugName ->
             ( { model | selectedListSlug = slugName }, getLeaderboardItems slugName )
