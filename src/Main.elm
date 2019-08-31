@@ -63,7 +63,7 @@ type Msg
     | GotJsonLeaderboardContent (Result Http.Error (List LeaderboardItem))
     | GotJsonLeaderboards (Result Http.Error (List Leaderboard))
     | GotJsonComposerStats (Result Http.Error (List ComposerStat))
-    | ClickedRr String
+    | NoAction
 
 
 
@@ -196,9 +196,9 @@ getComposerStats composerId =
         }
 
 
-resetViewport : String -> Cmd Msg
-resetViewport slug =
-    Task.perform (\_ -> ClickedLeaderboardSlug slug) (Dom.setViewport 0 0)
+resetViewport : Cmd Msg
+resetViewport =
+    Task.perform (\_ -> NoAction) (Dom.setViewport 0 0)
 
 
 
@@ -224,7 +224,7 @@ menuPartial model leaderboards =
 menuItemPartial : String -> Leaderboard -> Html Msg
 menuItemPartial currentSlug leaderboard =
     li
-        [ onClick (ClickedRr leaderboard.slug)
+        [ onClick (ClickedLeaderboardSlug leaderboard.slug)
         , class
             (if leaderboard.slug == currentSlug then
                 "selected"
@@ -322,14 +322,14 @@ view model =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        NoAction ->
+            ( model, Cmd.none )
+
         ClickedComposer ( composerId, composerName ) ->
             ( { model | selectedListSlug = "", currentLeaderboardItems = [], currentComposerName = composerName }, getComposerStats composerId )
 
         ClickedLeaderboardSlug slugName ->
-            ( { model | selectedListSlug = slugName }, getLeaderboardItems slugName )
-
-        ClickedRr slugName ->
-            ( model, resetViewport slugName )
+            ( { model | selectedListSlug = slugName }, Cmd.batch [ getLeaderboardItems slugName, resetViewport ] )
 
         GotJsonLeaderboardContent result ->
             case result of
