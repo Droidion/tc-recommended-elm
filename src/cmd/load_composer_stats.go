@@ -16,6 +16,7 @@ func loadComposerStats(db *sql.DB, composerID string) []ComposerStats {
 	stats := []ComposerStats{}
 
 	stmt, err := db.Prepare(`SELECT 
+		composers.name,
 		works.work, 
 		works.position, 
 		works.slug 
@@ -32,7 +33,7 @@ func loadComposerStats(db *sql.DB, composerID string) []ComposerStats {
 	defer rows.Close()
 	for rows.Next() {
 		stat := ComposerStats{}
-		err = rows.Scan(&stat.Work, &stat.Position, &stat.Slug)
+		err = rows.Scan(&stat.Name, &stat.Work, &stat.Position, &stat.Slug)
 		if err != nil {
 			log.Fatal(err)
 		}

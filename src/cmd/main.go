@@ -3,9 +3,9 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/gorilla/mux"
 	_ "github.com/mattn/go-sqlite3"
@@ -19,27 +19,35 @@ func main() {
 	}
 	defer db.Close()
 
-	r := mux.NewRouter()
+	router := mux.NewRouter()
 
-	r.HandleFunc("/api/leaderboards", func(w http.ResponseWriter, r *http.Request) {
-		json.NewEncoder(w).Encode(loadLeaderboardsList(db))
+	router.HandleFunc("/api/leaderboards", func(writer http.ResponseWriter, request *http.Request) {
+		json.NewEncoder(writer).Encode(loadLeaderboardsList(db))
 	})
 
-	r.HandleFunc("/api/leaderboard/{slug}", func(w http.ResponseWriter, r *http.Request) {
-		json.NewEncoder(w).Encode(loadLeaderboardContent(db, mux.Vars(r)["slug"]))
+	router.HandleFunc("/api/leaderboard/{slug}", func(writer http.ResponseWriter, request *http.Request) {
+		json.NewEncoder(writer).Encode(loadLeaderboardContent(db, mux.Vars(request)["slug"]))
 	})
 
-	r.HandleFunc("/api/composer/{composerID}", func(w http.ResponseWriter, r *http.Request) {
-		json.NewEncoder(w).Encode(loadComposerStats(db, mux.Vars(r)["composerID"]))
+	router.HandleFunc("/api/composer/{composerID}", func(writer http.ResponseWriter, request *http.Request) {
+		json.NewEncoder(writer).Encode(loadComposerStats(db, mux.Vars(request)["composerID"]))
 	})
 
-	r.HandleFunc("/api/best-composers", func(w http.ResponseWriter, r *http.Request) {
-		json.NewEncoder(w).Encode(loadComposersLeaderboard(db))
+	router.HandleFunc("/api/best-composers", func(writer http.ResponseWriter, request *http.Request) {
+		json.NewEncoder(writer).Encode(loadComposersLeaderboard(db))
 	})
 
-	r.PathPrefix("/").Handler(http.StripPrefix("", http.FileServer(http.Dir("assets/"))))
+	spa := SpaHandler{staticPath: "assets", indexPath: "index.html"}
+	router.PathPrefix("/").Handler(spa)
 
-	fmt.Println("Listening to localhost port 8080...")
-	http.ListenAndServe(":8080", r)
+	srv := &http.Server{
+		Handler: router,
+		Addr:    "127.0.0.1:8000",
+		// Good practice: enforce timeouts for servers you create!
+		WriteTimeout: 15 * time.Second,
+		ReadTimeout:  15 * time.Second,
+	}
+
+	log.Fatal(srv.ListenAndServe())
 
 }

@@ -2,12 +2,15 @@ module Main exposing (main)
 
 import Browser
 import Browser.Dom as Dom
+import Browser.Navigation as Nav
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Http
-import Json.Decode exposing (Decoder, field, int, list, map2, map3, string)
+import Json.Decode exposing (Decoder, field, int, list, map2, map3, map4, string)
 import Task
+import Url
+import Url.Parser exposing ((</>), Parser, int, map, oneOf, s, string)
 
 
 
@@ -29,7 +32,8 @@ type alias LeaderboardItem =
 
 
 type alias ComposerStat =
-    { work : String
+    { name : String
+    , work : String
     , position : Int
     , slug : String
     }
@@ -50,6 +54,8 @@ type alias Model =
     , composerStats : List ComposerStat
     , currentComposerName : String
     , error : String
+    , key : Nav.Key
+    , url : Url.Url
     }
 
 
@@ -58,29 +64,42 @@ type alias Model =
 
 
 type Msg
-    = ClickedLeaderboardSlug String
-    | ClickedComposer ( Int, String )
-    | GotJsonLeaderboardContent (Result Http.Error (List LeaderboardItem))
+    = GotJsonLeaderboardContent (Result Http.Error (List LeaderboardItem))
     | GotJsonLeaderboards (Result Http.Error (List Leaderboard))
     | GotJsonComposerStats (Result Http.Error (List ComposerStat))
+    | LinkClicked Browser.UrlRequest
+    | UrlChanged Url.Url
     | NoAction
+
+
+type Route
+    = HomeRoute
+    | ComposerRoute Int
+    | LeaderboardRoute String
 
 
 
 -- MODEL
 
 
-initialModel : () -> ( Model, Cmd Msg )
-initialModel _ =
-    ( { selectedListSlug = ""
-      , allLeaderboards = []
-      , currentLeaderboardItems = []
-      , composerStats = []
-      , currentComposerName = ""
-      , error = ""
-      }
-    , getLeaderboards
-    )
+initialModel : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
+initialModel flags url key =
+    let
+        parsed =
+            Url.Parser.parse routeParser url
+
+        model =
+            { selectedListSlug = ""
+            , allLeaderboards = []
+            , currentLeaderboardItems = []
+            , composerStats = []
+            , currentComposerName = ""
+            , error = ""
+            , key = key
+            , url = url
+            }
+    in
+    processUrl model url
 
 
 
@@ -125,6 +144,35 @@ structuredComposerStats stats leaderboards =
             (\stat -> not (List.isEmpty stat.works))
 
 
+routeParser : Parser (Route -> a) a
+routeParser =
+    oneOf
+        [ map HomeRoute (s "")
+        , map ComposerRoute (s "composer" </> Url.Parser.int)
+        , map LeaderboardRoute (s "leaderboard" </> Url.Parser.string)
+        ]
+
+
+processUrl : Model -> Url.Url -> ( Model, Cmd Msg )
+processUrl model url =
+    let
+        parsed =
+            Url.Parser.parse routeParser url
+    in
+    case parsed of
+        Just (ComposerRoute composerId) ->
+            ( { model | url = url, selectedListSlug = "", currentLeaderboardItems = [], currentComposerName = "" }, Cmd.batch [ getLeaderboards model, getComposerStats composerId ] )
+
+        Just (LeaderboardRoute slug) ->
+            ( { model | url = url, selectedListSlug = slug }, Cmd.batch [ getLeaderboards model, getLeaderboardItems slug, resetViewport ] )
+
+        Just HomeRoute ->
+            ( { model | url = url, selectedListSlug = "orchestral" }, Cmd.batch [ getLeaderboards model, getLeaderboardItems "orchestral", resetViewport ] )
+
+        _ ->
+            ( { model | url = url, selectedListSlug = "orchestral" }, Cmd.batch [ getLeaderboards model, getLeaderboardItems "orchestral", resetViewport ] )
+
+
 
 -- JSON decoders
 
@@ -132,25 +180,26 @@ structuredComposerStats stats leaderboards =
 singleWorkDecoder : Decoder LeaderboardItem
 singleWorkDecoder =
     map3 LeaderboardItem
-        (field "composer" string)
-        (field "composerId" int)
-        (field "work" string)
+        (field "composer" Json.Decode.string)
+        (field "composerId" Json.Decode.int)
+        (field "work" Json.Decode.string)
 
 
 leaderboardDecoder : Decoder Leaderboard
 leaderboardDecoder =
     map3 Leaderboard
-        (field "description" string)
-        (field "slug" string)
-        (field "name" string)
+        (field "description" Json.Decode.string)
+        (field "slug" Json.Decode.string)
+        (field "name" Json.Decode.string)
 
 
 composerStatDecoder : Decoder ComposerStat
 composerStatDecoder =
-    map3 ComposerStat
-        (field "work" string)
-        (field "position" int)
-        (field "slug" string)
+    map4 ComposerStat
+        (field "name" Json.Decode.string)
+        (field "work" Json.Decode.string)
+        (field "position" Json.Decode.int)
+        (field "slug" Json.Decode.string)
 
 
 leaderboardContentDecoder : Decoder (List LeaderboardItem)
@@ -180,12 +229,16 @@ getLeaderboardItems slug =
         }
 
 
-getLeaderboards : Cmd Msg
-getLeaderboards =
-    Http.get
-        { url = "/api/leaderboards"
-        , expect = Http.expectJson GotJsonLeaderboards leaderboardsListDecoder
-        }
+getLeaderboards : Model -> Cmd Msg
+getLeaderboards model =
+    if List.isEmpty model.allLeaderboards then
+        Http.get
+            { url = "/api/leaderboards"
+            , expect = Http.expectJson GotJsonLeaderboards leaderboardsListDecoder
+            }
+
+    else
+        Cmd.none
 
 
 getComposerStats : Int -> Cmd Msg
@@ -224,8 +277,7 @@ menuPartial model leaderboards =
 menuItemPartial : String -> Leaderboard -> Html Msg
 menuItemPartial currentSlug leaderboard =
     li
-        [ onClick (ClickedLeaderboardSlug leaderboard.slug)
-        , class
+        [ class
             (if leaderboard.slug == currentSlug then
                 "selected"
 
@@ -233,7 +285,8 @@ menuItemPartial currentSlug leaderboard =
                 ""
             )
         ]
-        [ text leaderboard.name ]
+        [ a [ href ("/leaderboard/" ++ leaderboard.slug) ] [ text leaderboard.name ]
+        ]
 
 
 leaderboardPartial : Model -> Html Msg
@@ -289,7 +342,9 @@ leaderboardItemPartial index item =
     div [ class "top-list-item" ]
         [ div [ class "order" ] [ text (String.fromInt (index + 1)) ]
         , div [ class "composer-work" ]
-            [ div [ class "composer clickable", onClick (ClickedComposer ( item.composerId, item.composer )) ] [ text item.composer ]
+            [ div [ class "composer clickable" ]
+                [ a [ href ("/composer/" ++ String.fromInt item.composerId) ] [ text item.composer ]
+                ]
             , div [ class "work" ] [ text item.work ]
             ]
         ]
@@ -303,6 +358,7 @@ view model =
     in
     div []
         [ headerPartial
+        , div [] [ text (Url.toString model.url) ]
         , div
             [ class "content" ]
             [ menuPartial model leaderboards
@@ -325,11 +381,16 @@ update msg model =
         NoAction ->
             ( model, Cmd.none )
 
-        ClickedComposer ( composerId, composerName ) ->
-            ( { model | selectedListSlug = "", currentLeaderboardItems = [], currentComposerName = composerName }, getComposerStats composerId )
+        LinkClicked urlRequest ->
+            case urlRequest of
+                Browser.Internal url ->
+                    ( model, Nav.pushUrl model.key (Url.toString url) )
 
-        ClickedLeaderboardSlug slugName ->
-            ( { model | selectedListSlug = slugName }, Cmd.batch [ getLeaderboardItems slugName, resetViewport ] )
+                Browser.External href ->
+                    ( model, Nav.load href )
+
+        UrlChanged url ->
+            processUrl model url
 
         GotJsonLeaderboardContent result ->
             case result of
@@ -342,7 +403,19 @@ update msg model =
         GotJsonComposerStats result ->
             case result of
                 Ok items ->
-                    ( { model | composerStats = items, error = "" }, Cmd.none )
+                    ( { model
+                        | composerStats = items
+                        , currentComposerName =
+                            case List.head items of
+                                Just item ->
+                                    item.name
+
+                                Nothing ->
+                                    ""
+                        , error = ""
+                      }
+                    , Cmd.none
+                    )
 
                 Err _ ->
                     ( { model | composerStats = [], error = "Could not load JSON data" }, Cmd.none )
@@ -350,21 +423,11 @@ update msg model =
         GotJsonLeaderboards result ->
             case result of
                 Ok items ->
-                    let
-                        firstSlug =
-                            case List.head items of
-                                Just item ->
-                                    item.slug
-
-                                Nothing ->
-                                    ""
-                    in
                     ( { model
                         | allLeaderboards = items
                         , error = ""
-                        , selectedListSlug = firstSlug
                       }
-                    , getLeaderboardItems firstSlug
+                    , Cmd.none
                     )
 
                 Err _ ->
@@ -375,11 +438,14 @@ update msg model =
 -- MAIN
 
 
+main : Program () Model Msg
 main =
-    Browser.document
+    Browser.application
         { init = initialModel
         , subscriptions = subscriptions
         , update = update
+        , onUrlChange = UrlChanged
+        , onUrlRequest = LinkClicked
         , view =
             \m ->
                 { title = "TC Recommended"
