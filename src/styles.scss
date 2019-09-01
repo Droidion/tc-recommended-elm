@@ -50,4 +50,8 @@
 
 .clickable {
     cursor: pointer;
+
+    &:hover {
+        color: $highlight-color;
+    }
 }

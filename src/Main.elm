@@ -358,7 +358,6 @@ view model =
     in
     div []
         [ headerPartial
-        , div [] [ text (Url.toString model.url) ]
         , div
             [ class "content" ]
             [ menuPartial model leaderboards
