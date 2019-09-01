@@ -39,6 +39,13 @@ type alias ComposerStat =
     }
 
 
+type alias BestComposer =
+    { composerId : Int
+    , composerName : String
+    , rating : Int
+    }
+
+
 type alias StructuredComposerStats =
     List
         { leaderboard : String
@@ -53,6 +60,7 @@ type alias Model =
     , currentLeaderboardItems : List LeaderboardItem
     , composerStats : List ComposerStat
     , currentComposerName : String
+    , bestComposers : List BestComposer
     , error : String
     , key : Nav.Key
     , url : Url.Url
@@ -67,6 +75,7 @@ type Msg
     = GotJsonLeaderboardContent (Result Http.Error (List LeaderboardItem))
     | GotJsonLeaderboards (Result Http.Error (List Leaderboard))
     | GotJsonComposerStats (Result Http.Error (List ComposerStat))
+    | GotJsonBestComposers (Result Http.Error (List BestComposer))
     | LinkClicked Browser.UrlRequest
     | UrlChanged Url.Url
     | NoAction
@@ -74,6 +83,7 @@ type Msg
 
 type Route
     = HomeRoute
+    | BestComposers
     | ComposerRoute Int
     | LeaderboardRoute String
 
@@ -94,6 +104,7 @@ initialModel flags url key =
             , currentLeaderboardItems = []
             , composerStats = []
             , currentComposerName = ""
+            , bestComposers = []
             , error = ""
             , key = key
             , url = url
@@ -148,6 +159,7 @@ routeParser : Parser (Route -> a) a
 routeParser =
     oneOf
         [ map HomeRoute (s "")
+        , map BestComposers (s "best-composers")
         , map ComposerRoute (s "composer" </> Url.Parser.int)
         , map LeaderboardRoute (s "leaderboard" </> Url.Parser.string)
         ]
@@ -161,16 +173,19 @@ processUrl model url =
     in
     case parsed of
         Just (ComposerRoute composerId) ->
-            ( { model | url = url, selectedListSlug = "", currentLeaderboardItems = [], currentComposerName = "" }, Cmd.batch [ getLeaderboards model, getComposerStats composerId ] )
+            ( { model | url = url, selectedListSlug = "", currentLeaderboardItems = [], currentComposerName = "", bestComposers = [] }, Cmd.batch [ getLeaderboards model, getComposerStats composerId ] )
 
         Just (LeaderboardRoute slug) ->
-            ( { model | url = url, selectedListSlug = slug }, Cmd.batch [ getLeaderboards model, getLeaderboardItems slug, resetViewport ] )
+            ( { model | url = url, selectedListSlug = slug, bestComposers = [] }, Cmd.batch [ getLeaderboards model, getLeaderboardItems slug, resetViewport ] )
 
         Just HomeRoute ->
-            ( { model | url = url, selectedListSlug = "orchestral" }, Cmd.batch [ getLeaderboards model, getLeaderboardItems "orchestral", resetViewport ] )
+            ( { model | url = url, selectedListSlug = "orchestral", bestComposers = [] }, Cmd.batch [ getLeaderboards model, getLeaderboardItems "orchestral", resetViewport ] )
+
+        Just BestComposers ->
+            ( { model | url = url, selectedListSlug = "" }, Cmd.batch [ getLeaderboards model, getBestComposers, resetViewport ] )
 
         _ ->
-            ( { model | url = url, selectedListSlug = "orchestral" }, Cmd.batch [ getLeaderboards model, getLeaderboardItems "orchestral", resetViewport ] )
+            ( { model | url = url, selectedListSlug = "orchestral", bestComposers = [] }, Cmd.batch [ getLeaderboards model, getLeaderboardItems "orchestral", resetViewport ] )
 
 
 
@@ -202,6 +217,14 @@ composerStatDecoder =
         (field "slug" Json.Decode.string)
 
 
+bestComposerDecoder : Decoder BestComposer
+bestComposerDecoder =
+    map3 BestComposer
+        (field "composerId" Json.Decode.int)
+        (field "composerName" Json.Decode.string)
+        (field "rating" Json.Decode.int)
+
+
 leaderboardContentDecoder : Decoder (List LeaderboardItem)
 leaderboardContentDecoder =
     list singleWorkDecoder
@@ -215,6 +238,11 @@ leaderboardsListDecoder =
 composerStatsDecoder : Decoder (List ComposerStat)
 composerStatsDecoder =
     list composerStatDecoder
+
+
+bestComposersDecoder : Decoder (List BestComposer)
+bestComposersDecoder =
+    list bestComposerDecoder
 
 
 
@@ -249,6 +277,14 @@ getComposerStats composerId =
         }
 
 
+getBestComposers : Cmd Msg
+getBestComposers =
+    Http.get
+        { url = "/api/best-composers"
+        , expect = Http.expectJson GotJsonBestComposers bestComposersDecoder
+        }
+
+
 resetViewport : Cmd Msg
 resetViewport =
     Task.perform (\_ -> NoAction) (Dom.setViewport 0 0)
@@ -270,7 +306,19 @@ menuPartial : Model -> List Leaderboard -> Html Msg
 menuPartial model leaderboards =
     aside []
         [ div [] [ text model.error ]
-        , ul [ class "menu" ] (List.map (menuItemPartial model.selectedListSlug) leaderboards)
+        , ul [ class "menu" ]
+            (li
+                [ class
+                    (if List.isEmpty model.bestComposers then
+                        ""
+
+                     else
+                        "selected"
+                    )
+                ]
+                [ a [ href "/best-composers" ] [ text "Best composers" ] ]
+                :: List.map (menuItemPartial model.selectedListSlug) leaderboards
+            )
         ]
 
 
@@ -350,6 +398,30 @@ leaderboardItemPartial index item =
         ]
 
 
+bestComposersPartial : Model -> Html Msg
+bestComposersPartial model =
+    section []
+        [ h1
+            []
+            [ text "Best Composers" ]
+        , div []
+            (List.indexedMap
+                (\ind el ->
+                    div [ class "top-list-item" ]
+                        [ div [ class "order" ] [ text (String.fromInt (ind + 1)) ]
+                        , div [ class "composer-work" ]
+                            [ div [ class "composer clickable" ]
+                                [ a [ href ("/composer/" ++ String.fromInt el.composerId) ] [ text el.composerName ]
+                                ]
+                            , div [ class "work" ] [ text (String.fromInt el.rating) ]
+                            ]
+                        ]
+                )
+                model.bestComposers
+            )
+        ]
+
+
 view : Model -> Html Msg
 view model =
     let
@@ -361,11 +433,14 @@ view model =
         , div
             [ class "content" ]
             [ menuPartial model leaderboards
-            , if String.isEmpty model.selectedListSlug then
-                composerStatsPartial model
+            , if not (String.isEmpty model.selectedListSlug) then
+                leaderboardPartial model
+
+              else if not (List.isEmpty model.bestComposers) then
+                bestComposersPartial model
 
               else
-                leaderboardPartial model
+                composerStatsPartial model
             ]
         ]
 
@@ -418,6 +493,19 @@ update msg model =
 
                 Err _ ->
                     ( { model | composerStats = [], error = "Could not load JSON data" }, Cmd.none )
+
+        GotJsonBestComposers result ->
+            case result of
+                Ok items ->
+                    ( { model
+                        | bestComposers = items
+                        , error = ""
+                      }
+                    , Cmd.none
+                    )
+
+                Err _ ->
+                    ( { model | bestComposers = [], error = "Could not load JSON data" }, Cmd.none )
 
         GotJsonLeaderboards result ->
             case result of
