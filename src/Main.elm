@@ -316,7 +316,7 @@ menuPartial model leaderboards =
                         "selected"
                     )
                 ]
-                [ a [ href "./best-composers" ] [ text "Best composers" ] ]
+                [ a [ href "best-composers" ] [ text "Best composers" ] ]
                 :: List.map (menuItemPartial model.selectedListSlug) leaderboards
             )
         ]
@@ -333,7 +333,7 @@ menuItemPartial currentSlug leaderboard =
                 ""
             )
         ]
-        [ a [ href ("./leaderboard/" ++ leaderboard.slug) ] [ text leaderboard.name ]
+        [ a [ href ("leaderboard/" ++ leaderboard.slug) ] [ text leaderboard.name ]
         ]
 
 
@@ -391,7 +391,7 @@ leaderboardItemPartial index item =
         [ div [ class "order" ] [ text (String.fromInt (index + 1)) ]
         , div [ class "composer-work" ]
             [ div [ class "composer clickable" ]
-                [ a [ href ("/composer/" ++ String.fromInt item.composerId) ] [ text item.composer ]
+                [ a [ href ("composer/" ++ String.fromInt item.composerId) ] [ text item.composer ]
                 ]
             , div [ class "work" ] [ text item.work ]
             ]
