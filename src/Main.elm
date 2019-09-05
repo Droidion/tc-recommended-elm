@@ -252,7 +252,7 @@ bestComposersDecoder =
 getLeaderboardItems : String -> Cmd Msg
 getLeaderboardItems slug =
     Http.get
-        { url = "/api/leaderboard/" ++ slug
+        { url = "./api/leaderboard/" ++ slug
         , expect = Http.expectJson GotJsonLeaderboardContent leaderboardContentDecoder
         }
 
@@ -261,7 +261,7 @@ getLeaderboards : Model -> Cmd Msg
 getLeaderboards model =
     if List.isEmpty model.allLeaderboards then
         Http.get
-            { url = "/api/leaderboards"
+            { url = "./api/leaderboards"
             , expect = Http.expectJson GotJsonLeaderboards leaderboardsListDecoder
             }
 
@@ -272,7 +272,7 @@ getLeaderboards model =
 getComposerStats : Int -> Cmd Msg
 getComposerStats composerId =
     Http.get
-        { url = "/api/composer/" ++ String.fromInt composerId
+        { url = "./api/composer/" ++ String.fromInt composerId
         , expect = Http.expectJson GotJsonComposerStats composerStatsDecoder
         }
 
@@ -280,7 +280,7 @@ getComposerStats composerId =
 getBestComposers : Cmd Msg
 getBestComposers =
     Http.get
-        { url = "/api/best-composers"
+        { url = "./api/best-composers"
         , expect = Http.expectJson GotJsonBestComposers bestComposersDecoder
         }
 

@@ -37,7 +37,7 @@ func main() {
 		json.NewEncoder(writer).Encode(loadComposersLeaderboard(db))
 	})
 
-	spa := SpaHandler{staticPath: "./assets", indexPath: "index.html"}
+	spa := SpaHandler{staticPath: "assets", indexPath: "index.html"}
 	router.PathPrefix("/").Handler(spa)
 
 	srv := &http.Server{
