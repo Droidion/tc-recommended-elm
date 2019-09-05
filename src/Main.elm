@@ -335,7 +335,7 @@ menuItemPartial currentSlug leaderboard =
                 ""
             )
         ]
-        [ a [ href ("/leaderboard/" ++ leaderboard.slug) ] [ text leaderboard.name ]
+        [ a [ href ("leaderboard/" ++ leaderboard.slug) ] [ text leaderboard.name ]
         ]
 
 
