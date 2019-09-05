@@ -316,7 +316,7 @@ menuPartial model leaderboards =
                         "selected"
                     )
                 ]
-                [ a [ href "/best-composers" ] [ text "Best composers" ] ]
+                [ a [ href "./best-composers" ] [ text "Best composers" ] ]
                 :: List.map (menuItemPartial model.selectedListSlug) leaderboards
             )
         ]
@@ -333,7 +333,7 @@ menuItemPartial currentSlug leaderboard =
                 ""
             )
         ]
-        [ a [ href ("/leaderboard/" ++ leaderboard.slug) ] [ text leaderboard.name ]
+        [ a [ href ("./leaderboard/" ++ leaderboard.slug) ] [ text leaderboard.name ]
         ]
 
 
