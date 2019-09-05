@@ -60,6 +60,7 @@ type alias Model =
     , currentLeaderboardItems : List LeaderboardItem
     , composerStats : List ComposerStat
     , currentComposerName : String
+    , basePath : String
     , bestComposers : List BestComposer
     , error : String
     , key : Nav.Key
@@ -92,8 +93,8 @@ type Route
 -- MODEL
 
 
-initialModel : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
-initialModel flags url key =
+initialModel : String -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
+initialModel basePath url key =
     let
         parsed =
             Url.Parser.parse routeParser url
@@ -108,6 +109,7 @@ initialModel flags url key =
             , error = ""
             , key = key
             , url = url
+            , basePath = basePath
             }
     in
     processUrl model url
@@ -333,7 +335,7 @@ menuItemPartial currentSlug leaderboard =
                 ""
             )
         ]
-        [ a [ href ("leaderboard/" ++ leaderboard.slug) ] [ text leaderboard.name ]
+        [ a [ href ("/leaderboard/" ++ leaderboard.slug) ] [ text leaderboard.name ]
         ]
 
 
@@ -391,7 +393,7 @@ leaderboardItemPartial index item =
         [ div [ class "order" ] [ text (String.fromInt (index + 1)) ]
         , div [ class "composer-work" ]
             [ div [ class "composer clickable" ]
-                [ a [ href ("composer/" ++ String.fromInt item.composerId) ] [ text item.composer ]
+                [ a [ href ("/composer/" ++ String.fromInt item.composerId) ] [ text item.composer ]
                 ]
             , div [ class "work" ] [ text item.work ]
             ]
@@ -525,7 +527,7 @@ update msg model =
 -- MAIN
 
 
-main : Program () Model Msg
+main : Program String Model Msg
 main =
     Browser.application
         { init = initialModel
