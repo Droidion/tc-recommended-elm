@@ -171,7 +171,7 @@ processUrl : Model -> Url.Url -> ( Model, Cmd Msg )
 processUrl model url =
     let
         parsed =
-            Url.Parser.parse routeParser url
+            Url.Parser.parse routeParser (if model.basePath == "/" then url else {url | path = String.replace model.basePath "" url.path } )
     in
     case parsed of
         Just (ComposerRoute composerId) ->
@@ -393,7 +393,7 @@ leaderboardItemPartial index item =
         [ div [ class "order" ] [ text (String.fromInt (index + 1)) ]
         , div [ class "composer-work" ]
             [ div [ class "composer clickable" ]
-                [ a [ href ("/composer/" ++ String.fromInt item.composerId) ] [ text item.composer ]
+                [ a [ href ("composer/" ++ String.fromInt item.composerId) ] [ text item.composer ]
                 ]
             , div [ class "work" ] [ text item.work ]
             ]
@@ -413,7 +413,7 @@ bestComposersPartial model =
                         [ div [ class "order" ] [ text (String.fromInt (ind + 1)) ]
                         , div [ class "composer-work" ]
                             [ div [ class "composer clickable" ]
-                                [ a [ href ("/composer/" ++ String.fromInt el.composerId) ] [ text el.composerName ]
+                                [ a [ href ("composer/" ++ String.fromInt el.composerId) ] [ text el.composerName ]
                                 ]
                             , div [ class "work" ] [ text (String.fromInt el.rating) ]
                             ]
